@@ -1,0 +1,12 @@
+CREATE TABLE Booking(
+  Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  CustomerId INT,
+  EmployeeId INT NOT NULL,
+  BookingDate DATE NOT NULL,
+  StartTime TIME NOT NULL,
+  EndTime TIME NOT NULL
+
+);
+
+
+
