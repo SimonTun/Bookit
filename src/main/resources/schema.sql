@@ -7,6 +7,22 @@ CREATE TABLE Booking(
   EndTime TIME NOT NULL
 
 );
+CREATE TABLE Customer(
+  Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  SocialSecurityNumber BIGINT,
+  FirstName VARCHAR(64),
+  LastName VARCHAR(64),
+  Email VARCHAR(64),
+  PhoneNumber VARCHAR(64)
+);
+CREATE TABLE Employee(
+  Id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  UserName VARCHAR(64),
+  FirstName VARCHAR(64),
+  LastName VARCHAR(64),
+  Email VARCHAR(64),
+  PhoneNumber VARCHAR(64)
+);
 
-
-
+ALTER TABLE Customer ADD FOREIGN KEY (Id) REFERENCES Booking(Id);
+ALTER TABLE Employee ADD FOREIGN KEY (Id) REFERENCES Booking(Id);
