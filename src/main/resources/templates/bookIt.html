@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="../static/style.css">
+    <script src="../static/javaScript.js"></script>
 
 
     <title>Din lokala bank</title>
@@ -13,20 +14,77 @@
 
 <body>
 <div>
-    <h1 class="centered"> Handelsbanken </h1>
-    <h3 class="description">Boka ditt möte här</h3>
+    <h1> Handelsbanken </h1>
 </div>
-
-
 
 <div class="privateOrBusiness">
-    <p> Önskar du boka som privatkund eller företagskund?</p>
-    <button onclick="business"> Företag </button>
-    <button onclick="private"> Privat </button>
+    <h3> Önskar du boka som privatkund eller företagskund?</h3>
+        <button onclick="business"> Företag </button>
+        <button onclick="private"> Privat </button>
 </div>
+
+<p> </p>
+
+
+    <div onload="renderDate()">
+    <div class="wrapper">
+        <div class="calendar">
+            <div class="month">
+                <div class="prev" onclick="moveDate('prev')">
+                    <span>&#10094;</span>
+                </div>
+                <h2 id="month"></h2>
+                <p id="date_str"></p>
+                <div class="next" onclick="moveDate('next')">
+                    <span>&#10095;</span>
+                </div>
+            </div>
+            <div class="weekdays">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+
+            </div>
+            <div class="days"></div>
+        </div>
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+<div class="freeSlots">
+
+    <h3>Välj vilken tid du önskar boka ditt möte: </h3>
+
+</div>
+
+<ul class="slots">
+    <li>10 - 11</li>
+    <li>13 - 14</li>
+    <li><span class="active">15 - 16</span></li>
+    <li>16 - 17</li>
+</ul>
+
+
+
+
 
 
 <script src="javaScript.js"></script>
+
+
 
 </body>
 
