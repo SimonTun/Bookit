@@ -26,7 +26,7 @@ body {font-family: Helvetica, Arial, sans-serif;}
 .wrapper {
     background-color: #dfe6e9;
     width: 100vw;
-    height: 100vh;
+    height: 56vh;
     display: flex;
     }
     .calendar {
@@ -41,7 +41,6 @@ body {font-family: Helvetica, Arial, sans-serif;}
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 40px 30px;
     text-align: center;
     background-color: #22a7f4;
     color: #fff;
@@ -58,6 +57,9 @@ body {font-family: Helvetica, Arial, sans-serif;}
     display: flex;
     flex-wrap: wrap;
     }
+
+
+
     .weekdays div,
     .days div {
     text-align: center;
