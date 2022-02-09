@@ -3,10 +3,9 @@ package com.bookit.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @org.springframework.stereotype.Repository
 public class Repository {
@@ -14,6 +13,92 @@ public class Repository {
     @Autowired
     private DataSource dataSource;
 
+    public ArrayList<Booking> getEmptyBookings() {
+
+        ArrayList<Booking> bookings = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Booking WHERE CustomerId is Null")) {
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                bookings.add(rsBooking(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return bookings;
+    }
+
+    public int addEmptyBooking(Booking booking) {
+        int generatedId = 0;   // Kan inte skapa int = null
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO Booking (EmployeeId, BookingDate, StartTime, EndTime) VALUES (?,?,?,?) ", Statement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, booking.getEmployeeId());
+            ps.setString(2, booking.getDate());
+            ps.setString(3, booking.getStartTime());
+            ps.setString(4, booking.getEndTime());
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();  // Hämta av databasen genererat ID för den tillagda raden
+            if (rs.next()) {
+                generatedId = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return generatedId;
+    }
+
+    public int addNewCustomer(Customer customer) {
+        int generatedId = -1;   // Kan inte skapa int = null
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO CUSTOMER (SocialSecurityNumber, FirstName, LastName, Email, PhoneNumber) VALUES (?,?,?,?,?) ", Statement.RETURN_GENERATED_KEYS)) {
+            ps.setLong(1, customer.getCustomerNumber());
+            ps.setString(2, customer.getFirstName());
+            ps.setString(3, customer.getLastName());
+            ps.setString(4, customer.getEmail());
+            ps.setString(5, customer.getPhoneNumber());
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();  // Hämta av databasen genererat ID för den tillagda raden
+            if (rs.next()) {
+                generatedId = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return generatedId;
+    }
+
+
+    public void addCustomerToBooking(int customerId, int bookingId) {
+
+    }
+
+    //Osäker på om metoden nedan behövs. Metodens svar går att få från getEmptyBookings().size
+
+//    public int countEmptyBookings() {  // Svarar med antalet lediga bookings
+//
+//        int result = 0;
+//
+//        try (Connection conn = dataSource.getConnection();
+//             Statement statement = conn.createStatement();
+//             ResultSet rs = statement.executeQuery("SELECT COUNT(*) AS COUNT FROM BOOKING WHERE CustomerId is Null")) {
+//
+//            if (rs.next()) {
+//                result = rs.getInt("COUNT");
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return result;
+//    }
 
     public Booking getBooking(int id) {
 
@@ -30,8 +115,6 @@ public class Repository {
         }
         return null;
     }
-
-
 
 
 

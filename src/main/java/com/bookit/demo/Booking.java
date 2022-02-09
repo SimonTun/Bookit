@@ -19,8 +19,8 @@ public class Booking {
         this.endTime = endTime;
     }
 
-    public Booking(int customerId, int employeeId, String date, String startTime, String endTime) {
-        this.customerId = customerId;
+    public Booking( int employeeId, String date, String startTime, String endTime) {
+
         this.employeeId = employeeId;
         this.date = date;
         this.startTime = startTime;
