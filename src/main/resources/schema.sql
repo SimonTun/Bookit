@@ -1,12 +1,17 @@
 CREATE TABLE Booking(
   Id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  CustomerId INT,
+  CustomerId INT NOT NULL,
+  TimeslotId INT NOT NULL
+);
+
+CREATE TABLE Timeslot(
+  Id BIGINT AUTO_INCREMENT PRIMARY KEY,
   EmployeeId INT NOT NULL,
   BookingDate DATE NOT NULL,
   StartTime TIME NOT NULL,
   EndTime TIME NOT NULL
-
 );
+
 CREATE TABLE Customer(
   Id BIGINT AUTO_INCREMENT PRIMARY KEY,
   SocialSecurityNumber BIGINT,
@@ -15,6 +20,7 @@ CREATE TABLE Customer(
   Email VARCHAR(64),
   PhoneNumber VARCHAR(64)
 );
+
 CREATE TABLE Employee(
   Id BIGINT AUTO_INCREMENT PRIMARY KEY,
   UserName VARCHAR(64),
@@ -24,5 +30,27 @@ CREATE TABLE Employee(
   PhoneNumber VARCHAR(64)
 );
 
-ALTER TABLE Customer ADD FOREIGN KEY (Id) REFERENCES Booking(Id);
-ALTER TABLE Employee ADD FOREIGN KEY (Id) REFERENCES Booking(Id);
+
+ALTER TABLE Booking ADD FOREIGN KEY (TimeslotId) REFERENCES Timeslot(Id);
+ALTER TABLE Booking ADD FOREIGN KEY (CustomerId) REFERENCES Customer(Id);
+ALTER TABLE Timeslot ADD FOREIGN KEY (EmployeeId) REFERENCES Employee(Id);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--ALTER TABLE Booking ADD FOREIGN KEY (CustomerId) REFERENCES Customer(Id);
