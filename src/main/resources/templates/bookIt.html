@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" type="text/css" href="../static/style.css" th:href="'/style.css'" >
+    <script src="../static/javaScript.js"  th:src="'/javaScript.js'"></script>
+
+
 
 
 
@@ -19,9 +22,9 @@
 </div>
 
 <div class="privateOrBusiness">
-    <h3> Önskar du boka som privatkund eller företagskund?</h3>
-        <button onclick="business"> Företag </button>
-        <button onclick="private"> Privat </button>
+    <h3> Vilken dag önskar du boka ditt möte?</h3>
+    <p>Efter du valt mötesdag kommer du få möjligheter att välja vilken tid mötet ska äga rum.</p>
+
 </div>
 
 <p> </p>
@@ -83,12 +86,12 @@
 
 
 
-<script src="javaScript.js"></script>
+
 
 
 
 </body>
 
-<script src="../static/javaScript.js"></script>
+
 
 </html>

@@ -15,7 +15,7 @@ public class BookitRestController {
     @Autowired
     private Repository repo;
 
-    @GetMapping("/{id}")
+    @GetMapping("/test/{id}")
     public Booking getBook(@PathVariable int id) {
         return repo.getBooking(id);
     }

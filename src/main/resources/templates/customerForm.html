@@ -2,9 +2,13 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Din lokala bank</title>
+  <link rel="stylesheet" type="text/css" href="../static/style.css" th:href="'/style.css'" >
 </head>
 <body>
+<div>
+  <h1> Handelsbanken </h1>
+</div>
 <p>test</p>
 <form action="/customerForm" th:object="${customer}" method="post" >
   <p>Personnummer</p><input type="text" th:field="*{customerNumber}" value="" >

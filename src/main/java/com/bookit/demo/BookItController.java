@@ -34,7 +34,7 @@ public class BookItController {
     public String privatForm (Model model, @ModelAttribute Customer customer) {
         model.addAttribute("customer",customer);
         repository.addCustomer(customer);
-        return "confirmation";
+        return "bookIt";
     }
 
 }
