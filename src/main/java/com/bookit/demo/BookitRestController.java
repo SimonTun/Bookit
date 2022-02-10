@@ -15,8 +15,8 @@ public class BookitRestController {
     private Repository repo;
 
     @GetMapping("/test/{id}")
-    public Booking getBook(@PathVariable int id) {
-        return repo.getBooking(id);
+    public Timeslot getBook(@PathVariable int id) {
+        return repo.getTimeslot(id);
     }
 
     @GetMapping("/emptyTimeslots")
