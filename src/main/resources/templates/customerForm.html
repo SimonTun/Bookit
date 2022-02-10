@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<p>test</p>
+<form action="/customerForm" th:object="${customer}" method="post" >
+  <p>Personnummer</p><input type="text" th:field="*{customerNumber}" value="" >
+  <p>Förnamn</p><input type="text" th:field="*{firstName}" >
+  <p>Efternamn</p><input type="text" th:field="*{lastName}" class="test">
+  <p>Telefonnummer</p><input type="text" th:field="*{phoneNumber}" class="test">
+  <p>Email adress</p><input type="text" th:field="*{email}" class="test">
+  <input class="btn btn-primary btn-lg px-4 me-md-2" type="submit" value="Submit">
+</form>
+</body>
+</html>

@@ -1,0 +1,136 @@
+
+h1{
+  font-family: Helvetica, Arial, sans-serif;
+  color: #1b9dc3;
+}
+
+
+.privateOrBusiness {
+
+  text-align: center;
+
+}
+
+.freeSlots {
+
+  text-align: center;
+
+}
+
+
+ul {list-style-type: none;}
+body {font-family: Helvetica, Arial, sans-serif;}
+
+/* Calender */
+
+.wrapper {
+    background-color: #dfe6e9;
+    width: 100vw;
+    height: 56vh;
+    display: flex;
+    }
+    .calendar {
+    margin: auto;
+    width: 600px;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.2);
+
+    }
+    .month {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    background-color: #22a7f4;
+    color: #fff;
+    }
+    .weekdays {
+    background-color: #3998cf;
+    color: #fff;
+    padding: 7px 0;
+    display: flex;
+    }
+    .days {
+    font-weight: 300;
+    padding: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    }
+
+
+
+    .weekdays div,
+    .days div {
+    text-align: center;
+    width: 14.28%;
+    }
+    .days div {
+    padding: 10px 0;
+    margin-bottom: 10px;
+    transition: all 0.4s;
+    }
+    .prev_date {
+    color: #999;
+    }
+    .today {
+    background-color: #22a7f4;
+    color: #fff;
+    }
+    .days div:hover {
+    cursor: pointer;
+    background-color: #dfe6e9
+    }
+    .prev,
+    .next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 23px;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: all 0.4s;
+    }
+    .prev:hover,
+    .next:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.2);
+    }
+    #month {
+    font-size: 30px;
+    font-weight: 500;}
+
+
+/* Free slots */
+
+
+
+.slots {
+  padding: 10px 0;
+  background: #eee;
+  margin: 0;
+  text-align: center;
+
+}
+
+.slots li {
+  padding: 15px;
+  list-style-type: none;
+  display: inline-block;
+  width: 11%;
+  text-align: center;
+  margin: 20px;
+  font-size:12px;
+  background: white;
+  border-radius: 30%;
+  color: black;
+}
+
+/* Highlight the "free slot" */
+.slots .active {
+  padding: 5px;
+  background: #1abc9c;
+  color: white !important
+}

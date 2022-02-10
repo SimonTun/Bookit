@@ -3,13 +3,13 @@ package com.bookit.demo;
 public class Customer {
 
     private int id;
-    private int customerNumber;
+    private long customerNumber;
     private String firstName;
     private String lastName;
     private String phoneNumber;
     private String email;
 
-    public Customer(int id, int customerNumber, String firstName, String lastName, String phoneNumber, String email) {
+    public Customer(int id, long customerNumber, String firstName, String lastName, String phoneNumber, String email) {
         this.id = id;
         this.customerNumber = customerNumber;
         this.firstName = firstName;
@@ -17,12 +17,16 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
-    public Customer(int customerNumber, String firstName, String lastName, String phoneNumber, String email) {
+    public Customer(long customerNumber, String firstName, String lastName, String phoneNumber, String email) {
         this.customerNumber = customerNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public Customer(){
+
     }
 
     public int getId() {
@@ -33,11 +37,11 @@ public class Customer {
         this.id = id;
     }
 
-    public int getCustomerNumber() {
+    public long getCustomerNumber() {
         return customerNumber;
     }
 
-    public void setCustomerNumber(int customerNumber) {
+    public void setCustomerNumber(long customerNumber) {
         this.customerNumber = customerNumber;
     }
 
