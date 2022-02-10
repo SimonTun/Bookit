@@ -39,3 +39,7 @@ function moveDate(para) {
    renderDate();
 }
 
+function availableTimes (){
+
+}
+
