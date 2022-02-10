@@ -33,8 +33,8 @@ public class BookItController {
     @PostMapping("/customerForm")
     public String privatForm (Model model, @ModelAttribute Customer customer) {
         model.addAttribute("customer",customer);
-        repository.addCustomer(customer);
-        return "confirmation";
+        repository.addNewCustomer(customer);
+        return "bookIt";
     }
 
 }

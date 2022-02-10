@@ -1,19 +1,20 @@
 
-var dt = new Date();
+let dt = new Date();
+
 function renderDate() {
    dt.setDate(1);
-   var day = dt.getDay();
-   var today = new Date();
-   var endDate = new Date(dt.getFullYear(), dt.getMonth() + 1,0).getDate();
-   var prevDate = new Date(dt.getFullYear(), dt.getMonth(), 0).getDate();
+   let day = dt.getDay();
+   let today = new Date();
+   let endDate = new Date(dt.getFullYear(), dt.getMonth() + 1,0).getDate();
+   let prevDate = new Date(dt.getFullYear(), dt.getMonth(), 0).getDate();
 
-   var months = ["January", "February", "March", "April", "May", "June", "July",
+   let months = ["January", "February", "March", "April", "May", "June", "July",
                "August", "September", "October", "November","December"]
 
    document.getElementById("month").innerHTML = months[dt.getMonth()];
    document.getElementById("date_str").innerHTML = dt.toDateString();
 
-   var cells = "";
+   let cells = "";
    for (x = day; x > 0; x--) {
        cells += "<div class='prev_date'>" + (prevDate - x + 1) + "</div>";
    }
@@ -37,3 +38,4 @@ function moveDate(para) {
    }
    renderDate();
 }
+

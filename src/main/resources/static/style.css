@@ -5,7 +5,7 @@ h1{
 
 
 .privateOrBusiness {
-
+  font-family: Helvetica, Arial, sans-serif;
   text-align: center;
 
 }
@@ -41,11 +41,11 @@ body {font-family: Helvetica, Arial, sans-serif;}
     align-items: center;
     width: 100%;
     text-align: center;
-    background-color: #22a7f4;
+    background-color: #1b9dc3;
     color: #fff;
     }
     .weekdays {
-    background-color: #3998cf;
+    background-color: #216f9d;
     color: #fff;
     padding: 7px 0;
     display: flex;
@@ -115,21 +115,18 @@ body {font-family: Helvetica, Arial, sans-serif;}
 }
 
 .slots li {
-  padding: 15px;
-  list-style-type: none;
-  display: inline-block;
-  width: 11%;
-  text-align: center;
-  margin: 20px;
-  font-size:12px;
-  background: white;
-  border-radius: 30%;
-  color: black;
+  background-color: #1b9dc3;
+      padding: 19px;
+      list-style-type: none;
+      display: inline-block;
+      text-align: center;
+      margin: 20px;
+      font-size: 15px;
+      border-radius: 35%;
+      color: white;
 }
 
 /* Highlight the "free slot" */
 .slots .active {
-  padding: 5px;
-  background: #1abc9c;
-  color: white !important
+  color: #1b9dc3;
 }
