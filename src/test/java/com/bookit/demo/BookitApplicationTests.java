@@ -37,6 +37,12 @@ class BookitApplicationTests {
     }
 
     @Test
+    void createNewTimeslot(){
+        int newTimeslotId = repo.newTimeslot(4, "2040-01-30","21:00:00", "22:00:00");
+        Assertions.assertEquals(6, newTimeslotId);
+    }
+
+    @Test
     void addNewCustomerToNewEmptyBooking() {
 
         // new newcustomer nedan funkar inte. Orsakar krasch
@@ -45,10 +51,10 @@ class BookitApplicationTests {
         int newBookingId = repo.addEmptyBooking(new Booking(1, "2022-02-28", "13:35:00", "14:15:00"));
         System.out.println("New customerID: " + newCustomerId);
         System.out.println("New BookingID: " + newBookingId);
+
+//        repo.addCustomerToBooking(newCustomerId, newBookingId);
+
         System.out.println("CustomerId from getBooking(): " + repo.getBooking(newBookingId).getCustomerId());
-
-
-        repo.addCustomerToBooking(newCustomerId, newBookingId);
 
         Assertions.assertEquals(repo.getBooking(newBookingId).getCustomerId(),newCustomerId);
 

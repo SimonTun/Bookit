@@ -53,8 +53,31 @@ public class Repository {
         return generatedId;
     }
 
+    public int newTimeslot(int employeeId, String date, String startTime, String endTime) {
+        int generatedId = -1;   // Kan inte skapa int = null
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO Timeslot (EmployeeId, BookingDate, StartTime, EndTime) VALUES (?,?,?,?) ", Statement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, employeeId);
+            ps.setString(2, date);
+            ps.setString(3, startTime);
+            ps.setString(4, endTime);
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();  // Hämta av databasen genererat ID för den tillagda raden
+            if (rs.next()) {
+                generatedId = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return generatedId;
+    }
+
     public int addNewCustomer(Customer customer) {
         int generatedId = -1;   // Kan inte skapa int = null
+        System.out.println("CustomerNumber: " +customer.getCustomerNumber());
 
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO CUSTOMER (SocialSecurityNumber, FirstName, LastName, Email, PhoneNumber) VALUES (?,?,?,?,?) ", Statement.RETURN_GENERATED_KEYS)) {
@@ -77,28 +100,29 @@ public class Repository {
     }
 
 
-    public void addCustomerToBooking(int customerId, int bookingId) {
+    public void createBooking(int customerId, int timeslotId) {
 
     }
 
     //Osäker på om metoden nedan behövs. Metodens svar går att få från getEmptyBookings().size
 
-//    public int countEmptyBookings() {  // Svarar med antalet lediga bookings
-//
-//        int result = 0;
-//
-//        try (Connection conn = dataSource.getConnection();
-//             Statement statement = conn.createStatement();
-//             ResultSet rs = statement.executeQuery("SELECT COUNT(*) AS COUNT FROM BOOKING WHERE CustomerId is Null")) {
-//
-//            if (rs.next()) {
-//                result = rs.getInt("COUNT");
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return result;
-//    }
+    public int countEmptyTimeslots() {  // Svarar med antalet lediga bookings
+
+        int result = -1;
+
+        try (Connection conn = dataSource.getConnection();
+             Statement statement = conn.createStatement();
+             ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM TIMESLOT AS COUNT " +
+                     "WHERE ID NOT IN (SELECT TIMESLOTID FROM BOOKING)")) {
+
+            if (rs.next()) {
+                result = rs.getInt("COUNT");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     public Booking getBooking(int id) {
 
