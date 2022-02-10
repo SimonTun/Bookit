@@ -11,52 +11,67 @@ class BookitApplicationTests {
     @Autowired
     private Repository repo;
 
+
     @Test
-    void contextLoads() {
+    void addNewTimeslotAndConfirmEntries() {
+        int id = repo.newTimeslot(2, "2057-01-30","23:00:00", "23:45:00");
+
+        System.out.println("\n--- A new timeslot with id nr " + id + " is successfully created ---\n");
+
+        Timeslot test = repo.getTimeslot(id);
+
+        Assertions.assertEquals(2, test.getEmployeeId());
+        Assertions.assertEquals("2057-01-30", test.getDate());
+        Assertions.assertEquals("23:00:00", test.getStartTime());
+        Assertions.assertEquals("23:45:00", test.getEndTime());
     }
 
     @Test
-    void firstTest() {
-        Booking test = repo.getBooking(1);
-        Assertions.assertEquals("12:00:00", test.getStartTime());
-    }
+    void addNewCustomerAndConfirmEntries() {
+        int id = repo.addNewCustomer(new Customer(6505050101L, "Peter","DenStore", "040-77 88 99","peter@sj.se" ));
 
-    @Test
-    void AddNewEmptyBookingAndConfirmStartDate() {
+        System.out.println("\n--- A new customer with id nr " + id + " is successfully created ---\n");
 
-//        Testar följande metoder:
-//        getBooking(int id)
-//        addEmptyBooking(Booking booking)
-//        getEmptyBookings()
+        Customer test = repo.getCustomer(id);
 
-        int numberOfEmptyBookings = repo.getEmptyBookings().size();
-        int id = repo.addEmptyBooking(new Booking(1, "2022-02-28", "13:35:00", "14:15:00"));
-
-        Assertions.assertEquals(numberOfEmptyBookings + 1, repo.getEmptyBookings().size());
-        Assertions.assertEquals("2022-02-28", repo.getBooking(id).getDate());
+        Assertions.assertEquals(6505050101L, test.getCustomerNumber());
+        Assertions.assertEquals("Peter", test.getFirstName());
+        Assertions.assertEquals("DenStore", test.getLastName());
+        Assertions.assertEquals("040-77 88 99", test.getPhoneNumber());
+        Assertions.assertEquals("peter@sj.se", test.getEmail());
     }
 
     @Test
     void createNewTimeslot(){
-        int newTimeslotId = repo.newTimeslot(4, "2040-01-30","21:00:00", "22:00:00");
-        Assertions.assertEquals(6, newTimeslotId);
+        int numberOfEmptyTimeslots = repo.numberOfEmptyTimeslots();
+        int id = repo.newTimeslot(4, "2040-01-30","21:00:00", "22:00:00");
+        System.out.println("\n--- A new timeslot with id nr " + id + " is successfully created ---\n");
+        Assertions.assertEquals(numberOfEmptyTimeslots +1, repo.numberOfEmptyTimeslots());
     }
 
     @Test
-    void addNewCustomerToNewEmptyBooking() {
+    void twoWaysOfCountingNumberOfEmptyTimeslots() {
+        Assertions.assertEquals(repo.getEmptyTimeslots().size(), repo.numberOfEmptyTimeslots());
+    }
 
-        // new newcustomer nedan funkar inte. Orsakar krasch
+    @Test
+    void addNewCustomerToNewEmptyTimeslotAndCreateNewBooking() {
+
+        // Testet är godkänt när antalet bookings har ökat med 1
+
+        int numberOfBookings = repo.numberOfBookings();
 
         int newCustomerId = repo.addNewCustomer(new Customer(8805050375L, "Simon","Stark", null,null ));
-        int newBookingId = repo.addEmptyBooking(new Booking(1, "2022-02-28", "13:35:00", "14:15:00"));
+        int newTimeslotId = repo.newTimeslot(1, "2022-02-28", "13:35:00", "14:15:00");
         System.out.println("New customerID: " + newCustomerId);
-        System.out.println("New BookingID: " + newBookingId);
+        System.out.println("New TimeslotID: " + newTimeslotId);
 
-//        repo.addCustomerToBooking(newCustomerId, newBookingId);
+        int newBookingID = repo.newBooking(newCustomerId, newTimeslotId);
 
-        System.out.println("CustomerId from getBooking(): " + repo.getBooking(newBookingId).getCustomerId());
+        System.out.println("\n--- A new booking with id nr " + newBookingID + " is successfully created ---\n");
 
-        Assertions.assertEquals(repo.getBooking(newBookingId).getCustomerId(),newCustomerId);
+
+        Assertions.assertEquals(numberOfBookings + 1,repo.numberOfBookings());
 
 
     }

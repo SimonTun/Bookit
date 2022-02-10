@@ -1,4 +1,3 @@
-
 INSERT INTO CUSTOMER (SocialSecurityNumber, FirstName, LastName, Email, PhoneNumber)
 VALUES(9001112500, 'Ulf', 'Line','ulf@hotmail.com', '08-54398723'),
 (8801128752, 'Sandra', 'Eriksson','Sandra@hotmail.com', '08-54357466'),
@@ -19,8 +18,22 @@ VALUES (1, '2018-03-08', '12:00', '13:00'),
 (4, '2018-03-10', '13:15', '14:00'),
 (2, '2018-03-10', '15:15', '16:00');
 
-INSERT INTO Booking (CustomerId, TimeslotId)
-VALUES (1, 2),
-(2, 3),
+INSERT INTO Booking (CustomerId, TimeslotId,textmessage)
+VALUES (1, 2,'jag vill se över min ränta'),
+(2, 3,null),
+(3, 4, 'Vill ha hjälp med BankID'),
+(4, 1,null);
+
+INSERT INTO Content (Subjects)
+ VALUES ('PensionSavings'),
+ ('CapitalSavings'),
+  ('Mortgages'),
+   ('Insurance'),
+    ('ChildSavings');
+
+
+INSERT INTO Subjects (BookingId ,ContentId)
+VALUES (1,5),
+(1, 3),
 (3, 4),
 (4, 1);

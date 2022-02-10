@@ -1,25 +1,23 @@
 package com.bookit.demo;
 
-public class Booking {
+public class Timeslot {
 
     private int id;
-    private int customerId;
     private int employeeId;
     private String date;
     private String startTime;
     private String endTime;
 
 
-    public Booking(int id, int customerId, int employeeId, String date, String startTime, String endTime) {
+    public Timeslot(int id, int employeeId, String date, String startTime, String endTime) {
         this.id = id;
-        this.customerId = customerId;
         this.employeeId = employeeId;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    public Booking( int employeeId, String date, String startTime, String endTime) {
+    public Timeslot(int employeeId, String date, String startTime, String endTime) {
 
         this.employeeId = employeeId;
         this.date = date;
@@ -27,7 +25,7 @@ public class Booking {
         this.endTime = endTime;
     }
 
-    public Booking() {
+    public Timeslot() {
 
     }
 
@@ -37,14 +35,6 @@ public class Booking {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
     }
 
     public int getEmployeeId() {
