@@ -58,9 +58,11 @@ body {font-family: Helvetica, Arial, sans-serif;}
     }
 
 
+ .day {
 
-    .weekdays div,
-    .days div {
+    }
+
+    .weekdays div, .days div {
     text-align: center;
     width: 14.28%;
     }
@@ -80,8 +82,7 @@ body {font-family: Helvetica, Arial, sans-serif;}
     cursor: pointer;
     background-color: #dfe6e9
     }
-    .prev,
-    .next {
+    .prev, .next {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -92,8 +93,7 @@ body {font-family: Helvetica, Arial, sans-serif;}
     background-color: rgba(0, 0, 0, 0.1);
     transition: all 0.4s;
     }
-    .prev:hover,
-    .next:hover {
+    .prev:hover, .next:hover {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.2);
     }
