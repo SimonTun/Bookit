@@ -24,16 +24,36 @@ VALUES (1, 2,'jag vill se över min ränta'),
 (3, 4, 'Vill ha hjälp med BankID'),
 (4, 1,null);
 
-INSERT INTO Content (Subjects)
+
+INSERT INTO Subject (Subject)
  VALUES ('PensionSavings'),
  ('CapitalSavings'),
   ('Mortgages'),
    ('Insurance'),
     ('ChildSavings');
 
+    INSERT INTO BOOKINGREQUEST (CustomerId)
+       VALUES (1),
+      (2);
 
-INSERT INTO Subjects (BookingId ,ContentId)
-VALUES (1,5),
-(1, 3),
-(3, 4),
-(4, 1);
+    INSERT INTO Content(BookingrequestID,SUBJECTSID)
+     VALUES (1,5),
+     (1,3),
+      (2,4),
+       (2,1),
+        (2,1);
+
+
+--INSERT INTO Content (Subjects)
+-- VALUES ('PensionSavings'),
+-- ('CapitalSavings'),
+--  ('Mortgages'),
+--   ('Insurance'),
+--    ('ChildSavings');
+
+--
+--INSERT INTO Subjects (BookingId ,ContentId)
+--VALUES (1,5),
+--(1, 3),
+--(3, 4),
+--(4, 1);

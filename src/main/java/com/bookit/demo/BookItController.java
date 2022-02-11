@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class BookItController {
@@ -18,10 +19,7 @@ public class BookItController {
     @GetMapping("/")
     public String bookIt() {
 
-        return "bookIt";
-
-    }
-
+        return "bookIt";}
 
     @GetMapping("/customer")
     public String privat(Model model, HttpSession session) {
@@ -33,8 +31,36 @@ public class BookItController {
     @PostMapping("/customerForm")
     public String privatForm (Model model, @ModelAttribute Customer customer) {
         model.addAttribute("customer",customer);
-        repository.addNewCustomer(customer);
-        return "bookIt";
+        int customerId =repository.addNewCustomer(customer);
+       int bookingId= repository.addNewBookingRequestId(customerId);
+
+        model.addAttribute("customerId",customerId);
+        model.addAttribute("bookingId",bookingId);
+
+        return "confirmation";
+    }
+
+
+    @GetMapping("/subjects")
+    public String subjects(Model model, HttpSession session){
+
+        model.addAttribute("contents", new Content());
+      model.getAttribute("customerId");
+        model.getAttribute("bookingId");
+
+        return "subjectForm";
+    }
+
+
+    @PostMapping("/bookIt")
+    public String allSubject (Model model, @ModelAttribute Content content) {
+
+    System.out.println(content.id);
+        System.out.println(content.bookingRequestId);
+        System.out.println(content.getSubjects());
+        System.out.println(content.getTextMessage());
+
+        return "confirmation";
     }
 
 }
