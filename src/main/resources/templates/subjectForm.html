@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Din lokala bank</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css" th:href="'/style.css'" >
+</head>
+<body>
+<h1>Handelsbanken</h1>
+<h3> Vad vill du ha rådgivning om?</h3>
+<form action="/bookIt" method="post" th:object="${contents}">
+    <input type="hidden" th:field="*{id}"  th:name="customerId"/>
+    <div th:each="contentOpt : ${T(com.bookit.demo.SUBJECT).values()}">
+        <input type="checkbox"th:value="${contentOpt}" th:text="${contentOpt}"/>
+    </div>
+       <p>Övrig information<p/>
+    <textarea name="textMessage" th:field="*{textMessage}" rows="7" cols="39"></textarea>
+<p></p>
+<input value="Nästa sida" type="submit"/>
+</form>
+</body>
+</html>

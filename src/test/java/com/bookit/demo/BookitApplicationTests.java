@@ -32,7 +32,9 @@ class BookitApplicationTests {
     @Test
     void addNewCustomerAndConfirmEntries() {
         int id = repo.addNewCustomer(new Customer(6505050101L, "Peter","DenStore", "040-77 88 99","peter@sj.se" ));
+        int bookingId=repo.addNewBookingRequestId(id);
 
+        System.out.println("\n--- A new customer with bookingid nr " + bookingId + " is successfully created ---\n");
         System.out.println("\n--- A new customer with id nr " + id + " is successfully created ---\n");
 
         Customer test = repo.getCustomer(id);
@@ -43,6 +45,8 @@ class BookitApplicationTests {
         Assertions.assertEquals("040-77 88 99", test.getPhoneNumber());
         Assertions.assertEquals("peter@sj.se", test.getEmail());
     }
+
+
 
     @Test
     void createNewTimeslot(){
