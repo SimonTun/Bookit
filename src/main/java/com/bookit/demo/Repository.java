@@ -16,7 +16,8 @@ public class Repository {
 
         ArrayList<Timeslot> timeslots = new ArrayList<>();
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT WHERE ID NOT IN (SELECT TIMESLOTID FROM BOOKING)")) {
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT " +
+                          "WHERE ID NOT IN (SELECT TIMESLOTID FROM BOOKING)")) {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -26,6 +27,26 @@ public class Repository {
             e.printStackTrace();
         }
 
+
+        return timeslots;
+    }
+
+    public ArrayList<Timeslot> getEmptyTimeslotsOnDate(String date) {
+
+        ArrayList<Timeslot> timeslots = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT " +
+                     "WHERE TIMESLOT.BOOKINGDATE = ? AND " +
+                             "NOT EXISTS (SELECT NULL FROM BOOKING WHERE TIMESLOTID = TIMESLOT.ID)")) {
+            ps.setString(1, date);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                timeslots.add(rsTimeslot(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return timeslots;
     }
