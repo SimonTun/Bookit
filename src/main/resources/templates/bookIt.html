@@ -8,11 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/style.css" th:href="'/style.css'" >
     <script src="../static/javaScript.js"  th:src="'/javaScript.js'"></script>
-
-
-
-
-
     <title>Din lokala bank</title>
 </head>
 
@@ -28,7 +23,6 @@
 </div>
 
 <p> </p>
-
 
     <div onload="renderDate()">
     <div class="wrapper">
@@ -53,20 +47,11 @@
                 <div>Sat</div>
 
             </div>
-            <div class="days"></div>
+            <div class="days" ></div>
         </div>
     </div>
 
     </div>
-
-
-
-
-
-
-
-
-
 
 <div class="freeSlots">
 
@@ -74,7 +59,17 @@
 
 </div>
 
-<ul class="slots">
+
+<ul class="slots" >
+    <span th:each="slot : ${timeslots}">
+        <li  th:text="${slot.startTime + ' - ' + slot.endTime}"></li>
+    </span>
+</ul>
+
+
+
+
+<ul class="slots" >
     <li>10 - 11</li>
     <li>13 - 14</li>
     <li><span class="active">15 - 16</span></li>

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @org.springframework.stereotype.Repository
 public class Repository {
@@ -12,11 +13,14 @@ public class Repository {
     @Autowired
     private DataSource dataSource;
 
+
+
     public ArrayList<Timeslot> getEmptyTimeslots() {
 
         ArrayList<Timeslot> timeslots = new ArrayList<>();
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT WHERE ID NOT IN (SELECT TIMESLOTID FROM BOOKING)")) {
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT " +
+                          "WHERE ID NOT IN (SELECT TIMESLOTID FROM BOOKING)")) {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -26,6 +30,26 @@ public class Repository {
             e.printStackTrace();
         }
 
+
+        return timeslots;
+    }
+
+    public ArrayList<Timeslot> getEmptyTimeslotsOnDate(String date) {
+
+        ArrayList<Timeslot> timeslots = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT " +
+                     "WHERE TIMESLOT.BOOKINGDATE = ? AND " +
+                             "NOT EXISTS (SELECT NULL FROM BOOKING WHERE TIMESLOTID = TIMESLOT.ID)")) {
+            ps.setString(1, date);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                timeslots.add(rsTimeslot(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return timeslots;
     }
@@ -94,6 +118,26 @@ public class Repository {
         }
         return generatedId;
     }
+    public int addNewBookingRequestId(int customerId) {
+        int generatedId = -1;   // Kan inte skapa int = null
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO BOOKINGREQUEST (CustomerId) VALUES (?) ", Statement.RETURN_GENERATED_KEYS)) {
+            ps.setLong(1, customerId);
+
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();  // Hämta av databasen genererat ID för den tillagda raden
+            if (rs.next()) {
+                generatedId = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return generatedId;
+    }
+
 
     //Metoden nedan behövs egentligen inte. Metodens svar går att få från getEmptyTimeslots().size
 
@@ -164,6 +208,27 @@ public class Repository {
         return null;
     }
 
+//    public List<Content> getAllsubjects() {
+//        List<Content> contents = new ArrayList<>();
+//        try (Connection conn = dataSource.getConnection();
+//             Statement stmt = conn.createStatement();
+//             ResultSet rs = stmt.executeQuery("SELECT * FROM Content")) {
+//
+//            while (rs.next()){
+//                contents.add(rsContent(rs));
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return contents;
+//    }
+
+//
+//    private Content rsContent(ResultSet rs) throws SQLException {
+//        return new Content(rs.getInt("id"),
+//                rs.getString("subjects"));
+//    }
     private Timeslot rsTimeslot(ResultSet rs) throws SQLException {
         return new Timeslot(rs.getInt("Id"),
                 rs.getInt("employeeId"),
@@ -181,5 +246,6 @@ public class Repository {
                 rs.getString("Email"));
 
     }
+
 
 }

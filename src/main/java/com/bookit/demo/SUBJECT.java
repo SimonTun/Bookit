@@ -1,0 +1,7 @@
+package com.bookit.demo;
+
+public enum SUBJECT {
+    PENSIONSAVINGS,CAPITALSAVINGS,MORTAGES,INSURANCE,CHILDSAVINGS;
+
+
+}
