@@ -164,6 +164,7 @@ public class Repository {
         return null;
     }
 
+
     private Timeslot rsTimeslot(ResultSet rs) throws SQLException {
         return new Timeslot(rs.getInt("Id"),
                 rs.getInt("employeeId"),

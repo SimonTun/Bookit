@@ -3,6 +3,19 @@ h1{
   color: #1b9dc3;
 }
 
+.startPage{
+
+background-image: url("LundCity.jpg");
+ background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: cover;
+
+}
+
+.startPage button{
+float: right;
+
+}
 
 .privateOrBusiness {
   font-family: Helvetica, Arial, sans-serif;

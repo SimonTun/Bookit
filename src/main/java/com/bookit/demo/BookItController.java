@@ -22,6 +22,13 @@ public class BookItController {
 
     }
 
+    @GetMapping("/start")
+    public String bookItStart() {
+
+        return "startPage";
+
+    }
+
 
     @GetMapping("/customer")
     public String privat(Model model, HttpSession session) {
@@ -35,6 +42,13 @@ public class BookItController {
         model.addAttribute("customer",customer);
         repository.addNewCustomer(customer);
         return "bookIt";
+    }
+
+    @GetMapping("/subjects")
+    public String subjects(Model model, HttpSession session){
+
+        model.addAttribute("contents", new Content());
+        return "subjectForm";
     }
 
 }
