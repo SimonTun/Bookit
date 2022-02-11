@@ -24,7 +24,8 @@ function renderDate() {
    for (i = 1; i <= endDate; i++) {
        if (i == today.getDate() && dt.getMonth() == today.getMonth()) cells += "<div class='today'>" + i + "</div>";
        else
-           cells += "<div>" + i + "</div>";
+           cells += "<div class='day' id= "+ i +" onclick=availableTimes('"+i+"')>" + i + "</div>";
+
    }
 
    document.getElementsByClassName("days")[0].innerHTML = cells;
@@ -39,4 +40,23 @@ function moveDate(para) {
    }
    renderDate();
 }
+
+function availableTimes (id){
+console.log("You pressed on a date, didn´t you!");
+console.log(id)
+}
+
+
+//försökte med en "click- listener" men fick inte det att fungera
+
+//const dateSelected = document.getElementsByClassName('day');
+//console.log(dateSelected)
+//
+//dateSelected.forEach((dateSelected) => {
+//    dateSelected.addEventListener('click', (event) => {
+//        console.log(event.currentTarget.dataset.date);
+//        console.log(dateSelected);
+//        console.log("HEJ!")
+//    });
+//});
 

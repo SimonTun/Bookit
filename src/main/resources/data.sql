@@ -24,7 +24,7 @@ VALUES (1, '2018-03-08', '12:00', '13:00'),
 (2, '2022-02-11', '15:15', '16:00'),
 (2, '2018-08-10', '15:15', '16:00');
 
-INSERT INTO Booking (CustomerId, TimeslotId, Textmessage)
+INSERT INTO Booking (CustomerId, TimeslotId,textmessage)
 VALUES (1, 2,'jag vill se över min ränta'),
 (2, 3,null),
 (3, 4, 'Vill ha hjälp med BankID'),
