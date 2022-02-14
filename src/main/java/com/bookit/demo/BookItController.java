@@ -32,7 +32,7 @@ public class BookItController {
     @GetMapping("/")
     public String bookIt(Model model, @RequestParam(required = false) String date) {
 
-        ArrayList<Timeslot> timeslots = new ArrayList<>();
+        ArrayList<Timeslot> timeslots;
 
         if (date == null || date.length() == 0) {
             System.out.println("no date = today");
@@ -57,7 +57,7 @@ public class BookItController {
 
 
     @GetMapping("/customer")
-    public String privat(Model model, HttpSession session) {
+    public String privat(Model model) {
         model.addAttribute("customer", new Customer());
         return "customerForm";
     }
@@ -96,13 +96,6 @@ public class BookItController {
         System.out.println(content.getTextMessage());
 
         return "confirmation";
-    }
-
-    @GetMapping("/subjects")
-    public String subjects(Model model, HttpSession session){
-
-        model.addAttribute("contents", new Content());
-        return "subjectForm";
     }
 
 }

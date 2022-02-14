@@ -54,6 +54,8 @@ public class BookitService {
     public ArrayList<Timeslot> hideDuplicateTimeslots(ArrayList<Timeslot> timeslots) {
 
         ArrayList<Timeslot> noDuplicates = new ArrayList<>();
+        if (timeslots.size()==0) return noDuplicates;
+
         boolean isDuplicate;
 
         noDuplicates.add(timeslots.get(0));

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+
 @SpringBootTest
 class BookitApplicationTests {
 
@@ -71,11 +73,6 @@ class BookitApplicationTests {
         Assertions.assertEquals(repo.getEmptyTimeslots().size(), repo.numberOfEmptyTimeslots());
     }
 
-    @Test
-    void testday() {
-        Assertions.assertEquals("2022-02-11", service.getTodaysDate());
-
-    }
 
     @Test
     void addNewCustomerToNewEmptyTimeslotAndCreateNewBooking() {
@@ -99,6 +96,15 @@ class BookitApplicationTests {
 
     @Test
     void hideDuplicateTimeslots() {
+
+        // First: Call method with parameter of size 0
+
+        ArrayList<Timeslot> timeslots = new ArrayList<>();
+        ArrayList<Timeslot> result = service.hideDuplicateTimeslots(timeslots);
+
+        Assertions.assertEquals(0, result.size());
+
+        // Second: Add three new timeslots. Does the method remove the second object where there is a duplicate starttime?
 
         int num = repo.getEmptyTimeslotsOnDate("1918-01-28").size();
 
