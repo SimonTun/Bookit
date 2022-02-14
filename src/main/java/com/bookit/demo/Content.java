@@ -8,6 +8,7 @@ public class Content {
     private List<SUBJECT> subjects;
     private String textMessage;
 
+
     public Content(int id, int bookingRequestId, List<SUBJECT> subjects, String textMessage) {
         this.id = id;
         this.bookingRequestId = bookingRequestId;

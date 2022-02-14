@@ -7,6 +7,28 @@
 </head>
 <body>
 <h1>Handelsbanken</h1>
+
+<!--<form action="/bookIt" method="post" th:object="${contents}">-->
+
+
+<form action="/subjectForm" th:object="${content}" method="post" >
+    <input type="checkbox" th:each="contentOpt : ${T(com.bookit.demo.SUBJECT).values()}"
+            th:value="${contentOpt}" th:text="${contentOpt}">
+<!--    <p>Övrigt:</p><input type="text" th:field="*{textMessage}">-->
+    <input type="submit" value="Submit">
+</form>
+
+
+
+<!--    <input type="checkbox" th:field="*{id}" />-->
+<!--    <input type="checkbox" th:field="*{bookingRequestId}" />-->
+<!--    &lt;!&ndash;    <p><input type="checkbox" th:each="*{subjects}" th:value="*{content.id}"/></p>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div th:each="subject : ${subjects}">&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="checkbox" th:value="${subject}" th:field="*{subject}" />&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--    <input value="Nästa sida" type="submit"/>-->
+
+
 <h3> Vad vill du ha rådgivning om?</h3>
 <form action="/bookIt" method="post" th:object="${contents}">
     <input type="hidden" th:field="*{id}"  th:name="customerId"/>
@@ -18,5 +40,6 @@
 <p></p>
 <input value="Nästa sida" type="submit"/>
 </form>
+
 </body>
 </html>
