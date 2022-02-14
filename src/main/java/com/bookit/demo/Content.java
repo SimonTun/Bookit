@@ -6,7 +6,7 @@ public class Content {
     int bookingRequestId;
     private List<SUBJECT> subjects;
     private String textMessage;
-    private List<SubjectClass> subjectClasses;
+//    private List<SubjectClass> subjectClasses;
 
 
 
@@ -17,9 +17,9 @@ public class Content {
         this.textMessage = textMessage;
     }
 
-    public Content(List<SubjectClass> subjectClasses){
-        this.subjectClasses = subjectClasses;
-    }
+//    public Content(List<SubjectClass> subjectClasses){
+//        this.subjectClasses = subjectClasses;
+//    }
 
     public Content( int bookingRequestId, List<SUBJECT> subjects, String textMessage) {
         this.bookingRequestId = bookingRequestId;

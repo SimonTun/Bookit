@@ -85,7 +85,7 @@ public class BookItController {
     @GetMapping("/subjects")
     public String subjects(Model model, HttpSession session) {
 
-        model.addAttribute("contents", new Content());
+  //      model.addAttribute("contents", new Content());
         model.getAttribute("customerId");
         model.getAttribute("bookingId");
 
