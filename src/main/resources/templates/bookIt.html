@@ -62,19 +62,19 @@
 
 <ul class="slots" >
     <span th:each="slot : ${timeslots}">
-        <li  th:text="${slot.startTime + ' - ' + slot.endTime}"></li>
+        <li><a th:href="'/confirm?id=' + ${slot.id}"  th:text="${slot.startTime + ' - ' + slot.endTime}"></a></li>
     </span>
 </ul>
 
 
 
 
-<ul class="slots" >
-    <li>10 - 11</li>
-    <li>13 - 14</li>
-    <li><span class="active">15 - 16</span></li>
-    <li>16 - 17</li>
-</ul>
+    <!--<ul class="slots" >-->
+    <!--    <li>10 - 11</li>-->
+    <!--    <li>13 - 14</li>-->
+    <!--    <li><span class="active">15 - 16</span></li>-->
+    <!--    <li>16 - 17</li>-->
+    <!--</ul>-->
 
 
 
