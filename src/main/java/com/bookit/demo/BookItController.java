@@ -95,11 +95,11 @@ public class BookItController {
         return "confirmation";
     }
 
-    @GetMapping("/subjects")
-    public String subjects(Model model, HttpSession session){
-
-        model.addAttribute("contents", new Content());
-        return "subjectForm";
-    }
+//    @GetMapping("/subjects")
+//    public String subjects(Model model, HttpSession session){
+//
+//        model.addAttribute("contents", new Content());
+//        return "subjectForm";
+//    }
 
 }

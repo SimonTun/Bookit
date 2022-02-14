@@ -27,7 +27,11 @@ function renderDate() {
    for (i = 1; i <= endDate; i++) {
        if (i == today.getDate() && dt.getMonth() == today.getMonth()) cells += "<div class='today'>" + i + "</div>";
        else
-           cells += "<div class='day' id= "+ i +" onclick=availableTimes('"+i+"')>" + i + "</div>";
+           cells += "<div class='day' id= "+ i +" th:onclick=href=/?=2018-03-10>" + i + "</div>";
+
+
+//availableTimes('"+i+"')>" + i + "
+
 
    }
 
