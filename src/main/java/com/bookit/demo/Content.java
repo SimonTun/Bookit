@@ -1,12 +1,13 @@
 package com.bookit.demo;
 
 import java.util.List;
-
 public class Content {
     int id;
     int bookingRequestId;
     private List<SUBJECT> subjects;
     private String textMessage;
+//    private List<SubjectClass> subjectClasses;
+
 
 
     public Content(int id, int bookingRequestId, List<SUBJECT> subjects, String textMessage) {
@@ -16,15 +17,16 @@ public class Content {
         this.textMessage = textMessage;
     }
 
+//    public Content(List<SubjectClass> subjectClasses){
+//        this.subjectClasses = subjectClasses;
+//    }
+
     public Content( int bookingRequestId, List<SUBJECT> subjects, String textMessage) {
         this.bookingRequestId = bookingRequestId;
         this.subjects = subjects;
         this.textMessage = textMessage;
     }
 
-    public Content() {
-
-    }
 
     public int getId() {
         return id;
@@ -58,5 +60,3 @@ public class Content {
         this.textMessage = textMessage;
     }
 }
-
-

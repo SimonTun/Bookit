@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.security.auth.Subject;
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
 import java.util.List;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Controller
 public class BookItController {
@@ -22,20 +25,26 @@ public class BookItController {
     @Autowired
     BookitService service;
 
+    @GetMapping("/generate")
+    public String generate(@RequestParam(required = false, defaultValue = "1") int num) throws ParseException {
+        service.generateTimeslots(num);
+        return "redirect:/";
+    }
+
     @GetMapping("/")
-    public String bookIt(Model model, @RequestParam (required = false) String date) {
+    public String bookIt(Model model, @RequestParam(required = false) String date) throws ParseException {
 
-        ArrayList<Timeslot> timeslots = new ArrayList<>();
-
-
+        ArrayList<Timeslot> timeslots;
 
         if (date == null || date.length() == 0) {
             System.out.println("no date = today");
-            timeslots = repository.getEmptyTimeslotsOnDate(service.getTodaysDate());
-        }
-        else
-        timeslots = repository.getEmptyTimeslotsOnDate(date);
+            timeslots = service.prepareTimeslotArrayForPresentationOnWeb(service.getTodaysDate());
+        } else
+            timeslots = service.prepareTimeslotArrayForPresentationOnWeb(date);
 
+        boolean hasValues = timeslots.size() > 0;
+
+        model.addAttribute("hasValues", hasValues);
 
 
         model.addAttribute("timeslots", timeslots);
@@ -54,30 +63,30 @@ public class BookItController {
 
 
     @GetMapping("/customer")
-    public String privat(Model model, HttpSession session) {
+    public String privat(Model model) {
         model.addAttribute("customer", new Customer());
         return "customerForm";
     }
 
 
     @PostMapping("/customerForm")
-    public String privatForm (Model model, @ModelAttribute Customer customer) {
-        model.addAttribute("customer",customer);
-        int customerId =repository.addNewCustomer(customer);
-       int bookingId= repository.addNewBookingRequestId(customerId);
+    public String privatForm(Model model, @ModelAttribute Customer customer) {
+        model.addAttribute("customer", customer);
+        int customerId = repository.addNewCustomer(customer);
+        int bookingId = repository.addNewBookingRequestId(customerId);
 
-        model.addAttribute("customerId",customerId);
-        model.addAttribute("bookingId",bookingId);
+        model.addAttribute("customerId", customerId);
+        model.addAttribute("bookingId", bookingId);
 
         return "confirmation";
     }
 
 
     @GetMapping("/subjects")
-    public String subjects(Model model, HttpSession session){
+    public String subjects(Model model, HttpSession session) {
 
-        model.addAttribute("contents", new Content());
-      model.getAttribute("customerId");
+  //      model.addAttribute("contents", new Content());
+        model.getAttribute("customerId");
         model.getAttribute("bookingId");
 
         return "subjectForm";
@@ -85,21 +94,14 @@ public class BookItController {
 
 
     @PostMapping("/bookIt")
-    public String allSubject (Model model, @ModelAttribute Content content) {
+    public String allSubject(Model model, @ModelAttribute Content content) {
 
-    System.out.println(content.id);
+        System.out.println(content.id);
         System.out.println(content.bookingRequestId);
         System.out.println(content.getSubjects());
         System.out.println(content.getTextMessage());
 
         return "confirmation";
-    }
-
-    @GetMapping("/subjects")
-    public String subjects(Model model, HttpSession session){
-
-        model.addAttribute("contents", new Content());
-        return "subjectForm";
     }
 
 }

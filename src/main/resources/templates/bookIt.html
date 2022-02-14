@@ -6,12 +6,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/style.css" th:href="'/style.css'" >
-    <script src="../static/javaScript.js"  th:src="'/javaScript.js'"></script>
+    <link rel="stylesheet" type="text/css" href="../static/style.css" th:href="'/style.css'">
+    <script src="../static/javaScript.js" th:src="'/javaScript.js'"></script>
     <title>Din lokala bank</title>
 </head>
 
-<body>
+<body onload="renderDate()">
 <div>
     <h1> Handelsbanken </h1>
 </div>
@@ -22,9 +22,9 @@
 
 </div>
 
-<p> </p>
+<p></p>
 
-    <div onload="renderDate()">
+<div onload="renderDate()">
     <div class="wrapper">
         <div class="calendar">
             <div class="month">
@@ -47,46 +47,33 @@
                 <div>Sat</div>
 
             </div>
-            <div class="days" ></div>
+            <div class="days"></div>
         </div>
     </div>
 
-    </div>
+</div>
 
 <div class="freeSlots">
+    <div th:if="${hasValues}">
+        <h3>Välj vilken tid du önskar boka ditt möte: </h3>
+    </div>
+    <!-- ELSE -->
+    <div th:unless="${hasValues}">
+        <h3>Tyvärr finns inga lediga tider denna dag </h3>
+    </div>
 
-    <h3>Välj vilken tid du önskar boka ditt möte: </h3>
 
 </div>
 
 
-<ul class="slots" >
+<ul class="slots">
     <span th:each="slot : ${timeslots}">
-        <li  th:text="${slot.startTime + ' - ' + slot.endTime}"></li>
+        <li><a th:href="'/confirm?id=' + ${slot.id}" th:text="${slot.startTime + ' - ' + slot.endTime}"></a></li>
     </span>
 </ul>
 
 
-
-
-<ul class="slots" >
-    <li>10 - 11</li>
-    <li>13 - 14</li>
-    <li><span class="active">15 - 16</span></li>
-    <li>16 - 17</li>
-</ul>
-
-
-
-
-
-
-
-
-
-
 </body>
-
 
 
 </html>
