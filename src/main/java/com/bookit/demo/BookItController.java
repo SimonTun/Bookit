@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
 import java.util.List;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -24,21 +25,25 @@ public class BookItController {
     BookitService service;
 
     @GetMapping("/generate")
-    public String generate(@RequestParam(required = false, defaultValue = "1") int num) {
+    public String generate(@RequestParam(required = false, defaultValue = "1") int num) throws ParseException {
         service.generateTimeslots(num);
         return "redirect:/";
     }
 
     @GetMapping("/")
-    public String bookIt(Model model, @RequestParam(required = false) String date) {
+    public String bookIt(Model model, @RequestParam(required = false) String date) throws ParseException {
 
         ArrayList<Timeslot> timeslots;
 
         if (date == null || date.length() == 0) {
             System.out.println("no date = today");
-            timeslots = service.hideDuplicateTimeslots(repository.getEmptyTimeslotsOnDate(service.getTodaysDate()));
+            timeslots = service.prepareTimeslotArrayForPresentationOnWeb(service.getTodaysDate());
         } else
-            timeslots = service.hideDuplicateTimeslots(repository.getEmptyTimeslotsOnDate(date));
+            timeslots = service.prepareTimeslotArrayForPresentationOnWeb(date);
+
+        boolean hasValues = timeslots.size() > 0;
+
+        model.addAttribute("hasValues", hasValues);
 
 
         model.addAttribute("timeslots", timeslots);
