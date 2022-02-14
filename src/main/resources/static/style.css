@@ -3,6 +3,45 @@ h1{
   color: #1b9dc3;
 }
 
+.startPage{
+
+    position: relative;
+    width: 100%;
+    background-image: url(LundCity.jpg);
+    background-size: cover;
+    height: 1000px;
+    width: 650px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: Helvetica, Arial, sans-serif;
+
+}
+
+.startPage button{
+    position: relative;
+    left: 661px;
+    top: 688px;
+    display: inline-block;
+    padding: 12px 40px;
+    border: 2px solid #005fa5;
+    color: #005fa5;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    line-height: 18px;
+    background-color: transparent;
+    font-size: 16px;
+    font-family: Helvetica, Arial, sans-serif;
+    cursor: pointer;
+
+}
+
+.startPage button:hover{
+  background-color:#f1f1f1;
+  color: grey;
+  text-decoration: underline;
+
+}
 
 .privateOrBusiness {
   font-family: Helvetica, Arial, sans-serif;
