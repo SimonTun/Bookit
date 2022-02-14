@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.security.auth.Subject;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.time.format.DateTimeFormatter;
@@ -60,28 +61,62 @@ public class BookItController {
     }
 
 
-    @PostMapping("/customerForm")
-    public String privatForm (Model model, @ModelAttribute Customer customer) {
-        model.addAttribute("customer",customer);
-        int customerId =repository.addNewCustomer(customer);
-       int bookingId= repository.addNewBookingRequestId(customerId);
+//    @PostMapping("/customerForm")
+//    public String privatForm (Model model, @ModelAttribute Customer customer) {
+//        model.addAttribute("customer",customer);
+//        int customerId =repository.addNewCustomer(customer);
+//       int bookingId= repository.addNewBookingRequestId(customerId);
+//
+//        model.addAttribute("customerId",customerId);
+//        model.addAttribute("bookingId",bookingId);
+//
+//        return "confirmation";
+//    }
 
-        model.addAttribute("customerId",customerId);
-        model.addAttribute("bookingId",bookingId);
 
-        return "confirmation";
-    }
-
+//    @GetMapping("/subjects")
+//    public String subjects(Model model, HttpSession session){
+//
+//        model.addAttribute("contents", new Content());
+//      model.getAttribute("customerId");
+//        model.getAttribute("bookingId");
+//
+//        return "subjectForm";
+//    }
+//
+//    @GetMapping("/subjects")
+//    public String subjects(Model model){
+//
+//        model.addAttribute("contents", new Content());
+//        return "subjectForm";
+//    }
 
     @GetMapping("/subjects")
-    public String subjects(Model model, HttpSession session){
+    public String subjects (Model model) {
 
-        model.addAttribute("contents", new Content());
-      model.getAttribute("customerId");
-        model.getAttribute("bookingId");
+        List<SubjectClass> subjectClasses = new ArrayList<>();
+        for (SUBJECT subject : SUBJECT.values()) {
+            subjectClasses.add(new SubjectClass(subject));
+        }
 
+
+
+        // Create Content
+        Content content = new Content(subjectClasses);
+
+//        // Add user to the model
+//       model.addAttribute("user", user);
+//
+       return "subjectForm";
+  }
+//
+    @PostMapping
+    public String form(@ModelAttribute Content content) {
+        System.out.println(content);
         return "subjectForm";
+
     }
+
 
 
     @PostMapping("/bookIt")
@@ -95,11 +130,6 @@ public class BookItController {
         return "confirmation";
     }
 
-    @GetMapping("/subjects")
-    public String subjects(Model model, HttpSession session){
 
-        model.addAttribute("contents", new Content());
-        return "subjectForm";
-    }
 
 }
