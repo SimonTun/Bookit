@@ -14,13 +14,12 @@ public class Repository {
     private DataSource dataSource;
 
 
-
     public ArrayList<Timeslot> getEmptyTimeslots() {
 
         ArrayList<Timeslot> timeslots = new ArrayList<>();
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT " +
-                          "WHERE ID NOT IN (SELECT TIMESLOTID FROM BOOKING)")) {
+                     "WHERE ID NOT IN (SELECT TIMESLOTID FROM BOOKING)")) {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -38,9 +37,30 @@ public class Repository {
 
         ArrayList<Timeslot> timeslots = new ArrayList<>();
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT " +
+             PreparedStatement ps = conn.prepareStatement("SELECT ID, EmployeeId, BookingDate, TO_CHAR(STARTTIME, 'HH24:MI') AS STARTTIME, TO_CHAR(ENDTIME, 'HH24:MI') AS ENDTIME FROM TIMESLOT " +
                      "WHERE TIMESLOT.BOOKINGDATE = ? AND " +
-                             "NOT EXISTS (SELECT NULL FROM BOOKING WHERE TIMESLOTID = TIMESLOT.ID)")) {
+                     "NOT EXISTS (SELECT NULL FROM BOOKING WHERE TIMESLOTID = TIMESLOT.ID) " +
+                     "ORDER BY STARTTIME")) {
+            ps.setString(1, date);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                timeslots.add(rsTimeslot(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return timeslots;
+    }
+
+    public ArrayList<Timeslot> getDistinctEmptyTimeslotsOnDate(String date) {
+
+        ArrayList<Timeslot> timeslots = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT ID, EmployeeId, BookingDate, DISTINCT(STARTTIME), ENDTIME FROM TIMESLOT " +
+                     "WHERE TIMESLOT.BOOKINGDATE = ? AND " +
+                     "NOT EXISTS (SELECT NULL FROM BOOKING WHERE TIMESLOTID = TIMESLOT.ID)")) {
             ps.setString(1, date);
             ResultSet rs = ps.executeQuery();
 
@@ -118,6 +138,7 @@ public class Repository {
         }
         return generatedId;
     }
+
     public int addNewBookingRequestId(int customerId) {
         int generatedId = -1;   // Kan inte skapa int = null
 
@@ -224,7 +245,7 @@ public class Repository {
 //        return contents;
 //    }
 
-//
+    //
 //    private Content rsContent(ResultSet rs) throws SQLException {
 //        return new Content(rs.getInt("id"),
 //                rs.getString("subjects"));
