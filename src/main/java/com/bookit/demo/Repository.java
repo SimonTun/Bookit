@@ -36,7 +36,8 @@ public class Repository {
 
         ArrayList<Timeslot> timeslots = new ArrayList<>();
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT ID, EmployeeId, BookingDate, TO_CHAR(STARTTIME, 'HH24:MI') AS STARTTIME, TO_CHAR(ENDTIME, 'HH24:MI') AS ENDTIME FROM TIMESLOT " +
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT " +
+//             PreparedStatement ps = conn.prepareStatement("SELECT ID, EmployeeId, BookingDate, TO_CHAR(STARTTIME, 'HH24:MI') AS STARTTIME, TO_CHAR(ENDTIME, 'HH24:MI') AS ENDTIME FROM TIMESLOT " +
                      "WHERE TIMESLOT.BOOKINGDATE = ? AND " +
                      "NOT EXISTS (SELECT NULL FROM BOOKING WHERE TIMESLOTID = TIMESLOT.ID) " +
                      "ORDER BY STARTTIME")) {

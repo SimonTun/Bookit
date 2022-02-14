@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 @SpringBootTest
@@ -48,6 +49,24 @@ class BookitApplicationTests {
         Assertions.assertEquals("peter@sj.se", test.getEmail());
     }
 
+    @Test
+    void parseTime() throws ParseException {
+
+        Assertions.assertEquals("19:50", service.parseTimeToHHMM("19:50:51"));
+    }
+
+
+    @Test
+    void parseTimesInTimeslotArray() throws ParseException {
+
+        ArrayList<Timeslot> timeslots = new ArrayList<>();
+        timeslots.add(new Timeslot(1,2,"2019-01-01","15:20:00","15:25:00"));
+
+        Assertions.assertEquals("15:20", service.parseTimeslotTimesToHHMM(timeslots).get(0).getStartTime());
+
+    }
+
+
 
     @Test
     void createNewTimeslot() {
@@ -56,6 +75,8 @@ class BookitApplicationTests {
         System.out.println("\n--- A new timeslot with id nr " + id + " is successfully created ---\n");
         Assertions.assertEquals(numberOfEmptyTimeslots + 1, repo.numberOfEmptyTimeslots());
     }
+
+
 
 
     @Test
@@ -119,7 +140,7 @@ class BookitApplicationTests {
     }
 
     @Test
-    void randomTimeslotGeneratorTest() {
+    void randomTimeslotGeneratorTest() throws ParseException {
         int num = repo.numberOfEmptyTimeslots();
         service.generateTimeslots(0);
         Assertions.assertEquals(repo.numberOfEmptyTimeslots() != num, repo.numberOfEmptyTimeslots() > num);
