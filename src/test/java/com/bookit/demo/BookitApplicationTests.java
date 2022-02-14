@@ -11,6 +11,9 @@ class BookitApplicationTests {
     @Autowired
     private Repository repo;
 
+    @Autowired
+    private BookitService service;
+
 
     @Test
     void addNewTimeslotAndConfirmEntries() {
@@ -29,7 +32,9 @@ class BookitApplicationTests {
     @Test
     void addNewCustomerAndConfirmEntries() {
         int id = repo.addNewCustomer(new Customer(6505050101L, "Peter","DenStore", "040-77 88 99","peter@sj.se" ));
+        int bookingId=repo.addNewBookingRequestId(id);
 
+        System.out.println("\n--- A new customer with bookingid nr " + bookingId + " is successfully created ---\n");
         System.out.println("\n--- A new customer with id nr " + id + " is successfully created ---\n");
 
         Customer test = repo.getCustomer(id);
@@ -41,6 +46,8 @@ class BookitApplicationTests {
         Assertions.assertEquals("peter@sj.se", test.getEmail());
     }
 
+
+
     @Test
     void createNewTimeslot(){
         int numberOfEmptyTimeslots = repo.numberOfEmptyTimeslots();
@@ -49,9 +56,27 @@ class BookitApplicationTests {
         Assertions.assertEquals(numberOfEmptyTimeslots +1, repo.numberOfEmptyTimeslots());
     }
 
+
+    @Test
+    void createNewTimeslotAndCheckIfNewItAddedOnThatDate(){
+        String date = "2040-01-30";
+        int numberOfEmptyTimeslotsThatDay = repo.getEmptyTimeslotsOnDate(date).size();
+        int id = repo.newTimeslot(4, date,"21:00:00", "22:00:00");
+        System.out.println("\n--- A new timeslot with id nr " + id + " is successfully created ---\n");
+        Assertions.assertEquals(numberOfEmptyTimeslotsThatDay +1, repo.getEmptyTimeslotsOnDate(date).size());
+    }
+
+
+
     @Test
     void twoWaysOfCountingNumberOfEmptyTimeslots() {
         Assertions.assertEquals(repo.getEmptyTimeslots().size(), repo.numberOfEmptyTimeslots());
+    }
+
+    @Test
+    void testday() {
+        Assertions.assertEquals("2022-02-11", service.getTodaysDate());
+
     }
 
     @Test
@@ -72,7 +97,6 @@ class BookitApplicationTests {
 
 
         Assertions.assertEquals(numberOfBookings + 1,repo.numberOfBookings());
-
 
     }
 
