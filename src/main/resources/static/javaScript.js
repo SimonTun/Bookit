@@ -27,7 +27,10 @@ function renderDate() {
    for (i = 1; i <= endDate; i++) {
        if (i == today.getDate() && dt.getMonth() == today.getMonth()) cells += "<div class='today'>" + i + "</div>";
        else
-           cells += "<div class='day' id= "+ i +" th:onclick=href=/?=2018-03-10>" + i + "</div>";
+             cells += "<div class='day' id= "+ i +" onclick=availableTimes('"+i+"')>" + i + "</div>";
+
+// under här försökte jag få in länken direkt men det gick inte så vi går via en funktion istället.
+//           cells += "<div class='day' id= "+ i +" th:onclick=window.location.href="/?=2018-03-10">" + i + "</div>";
 
 
 //availableTimes('"+i+"')>" + i + "
@@ -51,10 +54,9 @@ function moveDate(para) {
 }
 
 function availableTimes (id){
-console.log("You pressed on a date, didn´t you!");
-console.log(id)
-console.log(month)
-console.log(year)
+let bookingDate = year + "-" + (month+1) + "-" + id;
+console.log(bookingDate);
+window.location.href="http://localhost:8080/?date=" + bookingDate +"";
 
 }
 
