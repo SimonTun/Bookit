@@ -1,5 +1,8 @@
 
 let dt = new Date();
+let month = dt.getMonth();
+let year = dt.getFullYear();
+
 
 function renderDate() {
    dt.setDate(1);
@@ -33,9 +36,11 @@ function renderDate() {
 function moveDate(para) {
    if(para == "prev") {
        dt.setMonth(dt.getMonth() - 1);
+       month = dt.getMonth();
    }
    else if(para == 'next') {
        dt.setMonth(dt.getMonth() + 1);
+       month = dt.getMonth();
    }
    renderDate();
 }
@@ -43,6 +48,9 @@ function moveDate(para) {
 function availableTimes (id){
 console.log("You pressed on a date, didn´t you!");
 console.log(id)
+console.log(month)
+console.log(year)
+
 }
 
 
