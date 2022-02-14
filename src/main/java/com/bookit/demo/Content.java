@@ -1,10 +1,14 @@
 package com.bookit.demo;
+
 import java.util.List;
+
 public class Content {
     int id;
     int bookingRequestId;
     private List<SUBJECT> subjects;
     private String textMessage;
+
+
     public Content(int id, int bookingRequestId, List<SUBJECT> subjects, String textMessage) {
         this.id = id;
         this.bookingRequestId = bookingRequestId;
@@ -54,3 +58,5 @@ public class Content {
         this.textMessage = textMessage;
     }
 }
+
+
