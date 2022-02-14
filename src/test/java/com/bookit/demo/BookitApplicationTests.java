@@ -17,7 +17,7 @@ class BookitApplicationTests {
 
     @Test
     void addNewTimeslotAndConfirmEntries() {
-        int id = repo.newTimeslot(2, "2057-01-30","23:00:00", "23:45:00");
+        int id = repo.newTimeslot(2, "2057-01-30", "23:00:00", "23:45:00");
 
         System.out.println("\n--- A new timeslot with id nr " + id + " is successfully created ---\n");
 
@@ -31,8 +31,8 @@ class BookitApplicationTests {
 
     @Test
     void addNewCustomerAndConfirmEntries() {
-        int id = repo.addNewCustomer(new Customer(6505050101L, "Peter","DenStore", "040-77 88 99","peter@sj.se" ));
-        int bookingId=repo.addNewBookingRequestId(id);
+        int id = repo.addNewCustomer(new Customer(6505050101L, "Peter", "DenStore", "040-77 88 99", "peter@sj.se"));
+        int bookingId = repo.addNewBookingRequestId(id);
 
         System.out.println("\n--- A new customer with bookingid nr " + bookingId + " is successfully created ---\n");
         System.out.println("\n--- A new customer with id nr " + id + " is successfully created ---\n");
@@ -47,25 +47,23 @@ class BookitApplicationTests {
     }
 
 
-
     @Test
-    void createNewTimeslot(){
+    void createNewTimeslot() {
         int numberOfEmptyTimeslots = repo.numberOfEmptyTimeslots();
-        int id = repo.newTimeslot(4, "2040-01-30","21:00:00", "22:00:00");
+        int id = repo.newTimeslot(4, "2040-01-30", "21:00:00", "22:00:00");
         System.out.println("\n--- A new timeslot with id nr " + id + " is successfully created ---\n");
-        Assertions.assertEquals(numberOfEmptyTimeslots +1, repo.numberOfEmptyTimeslots());
+        Assertions.assertEquals(numberOfEmptyTimeslots + 1, repo.numberOfEmptyTimeslots());
     }
 
 
     @Test
-    void createNewTimeslotAndCheckIfNewItAddedOnThatDate(){
+    void createNewTimeslotAndCheckIfNewItAddedOnThatDate() {
         String date = "2040-01-30";
         int numberOfEmptyTimeslotsThatDay = repo.getEmptyTimeslotsOnDate(date).size();
-        int id = repo.newTimeslot(4, date,"21:00:00", "22:00:00");
+        int id = repo.newTimeslot(4, date, "21:00:00", "22:00:00");
         System.out.println("\n--- A new timeslot with id nr " + id + " is successfully created ---\n");
-        Assertions.assertEquals(numberOfEmptyTimeslotsThatDay +1, repo.getEmptyTimeslotsOnDate(date).size());
+        Assertions.assertEquals(numberOfEmptyTimeslotsThatDay + 1, repo.getEmptyTimeslotsOnDate(date).size());
     }
-
 
 
     @Test
@@ -86,7 +84,7 @@ class BookitApplicationTests {
 
         int numberOfBookings = repo.numberOfBookings();
 
-        int newCustomerId = repo.addNewCustomer(new Customer(8805050375L, "Simon","Stark", null,null ));
+        int newCustomerId = repo.addNewCustomer(new Customer(8805050375L, "Simon", "Stark", null, null));
         int newTimeslotId = repo.newTimeslot(1, "2022-02-28", "13:35:00", "14:15:00");
         System.out.println("New customerID: " + newCustomerId);
         System.out.println("New TimeslotID: " + newTimeslotId);
@@ -95,8 +93,30 @@ class BookitApplicationTests {
 
         System.out.println("\n--- A new booking with id nr " + newBookingID + " is successfully created ---\n");
 
+        Assertions.assertEquals(numberOfBookings + 1, repo.numberOfBookings());
 
-        Assertions.assertEquals(numberOfBookings + 1,repo.numberOfBookings());
+    }
+
+    @Test
+    void hideDuplicateTimeslots() {
+
+        int num = repo.getEmptyTimeslotsOnDate("1918-01-28").size();
+
+        repo.newTimeslot(1, "1918-01-28", "13:35:00", "14:15:00");
+        repo.newTimeslot(1, "1918-01-28", "13:35:00", "14:15:00");
+        repo.newTimeslot(1, "1918-01-28", "14:35:00", "14:15:00");
+
+
+        Assertions.assertEquals(num + 2, service.hideDuplicateTimeslots(repo.getEmptyTimeslotsOnDate("1918-01-28")).size());
+
+
+    }
+
+    @Test
+    void randomTimeslotGeneratorTest() {
+        int num = repo.numberOfEmptyTimeslots();
+        service.generateTimeslots(0);
+        Assertions.assertEquals(repo.numberOfEmptyTimeslots() != num, repo.numberOfEmptyTimeslots() > num);
 
     }
 
