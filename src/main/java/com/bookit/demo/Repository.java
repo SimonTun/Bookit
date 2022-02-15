@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 @org.springframework.stereotype.Repository
 public class Repository {
@@ -115,6 +114,57 @@ public class Repository {
         }
         return generatedId;
     }
+
+    public void newContent(ContentHolder content) {
+
+        String value;
+        int bookingRequestId = content.getBookingRequestId();
+
+        storeTextMessage(bookingRequestId, content.getTextMessage());   // Spara textMessage till sql BOOKINGREQUEST, genom separat metod
+
+        for (int i = 0; i < content.getContents().size(); i++) {
+            if (content.getContents().get(i).isEnabled()) {
+                value = content.getContents().get(i).getSubjects().name();
+
+                try (Connection conn = dataSource.getConnection();
+                     PreparedStatement ps = conn.prepareStatement("INSERT INTO CONTENT (BookingRequestId, content) VALUES (?,?) ")) {
+                    ps.setInt(1, bookingRequestId);
+                    ps.setString(2, value);
+
+                    ps.executeUpdate();
+
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+
+        }
+
+    }
+    public void storeTextMessage(int bookingrequestId, String textmessage) {
+
+//        UPDATE Customers
+//        SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
+//        WHERE CustomerID = 1;
+//
+
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("UPDATE BOOKINGREQUEST SET TEXTMESSAGE = ? WHERE ID = ? ")) {
+            ps.setString(1, textmessage);
+            ps.setInt(2, bookingrequestId);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     public int addNewCustomer(Customer customer) {
         int generatedId = -1;   // Kan inte skapa int = null
