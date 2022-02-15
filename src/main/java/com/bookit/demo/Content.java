@@ -1,32 +1,31 @@
 package com.bookit.demo;
 
 import java.util.List;
+
 public class Content {
     int id;
-    int bookingRequestId;
-    private List<SUBJECT> subjects;
-    private String textMessage;
-//    private List<SubjectClass> subjectClasses;
+    private SUBJECT subjects;
+    boolean enabled;
 
 
-
-    public Content(int id, int bookingRequestId, List<SUBJECT> subjects, String textMessage) {
-        this.id = id;
-        this.bookingRequestId = bookingRequestId;
+    public Content(int id,SUBJECT subjects, boolean enabled) {
+        this.id=id;
         this.subjects = subjects;
-        this.textMessage = textMessage;
+        this.enabled = enabled;
+
     }
 
-//    public Content(List<SubjectClass> subjectClasses){
-//        this.subjectClasses = subjectClasses;
-//    }
-
-    public Content( int bookingRequestId, List<SUBJECT> subjects, String textMessage) {
-        this.bookingRequestId = bookingRequestId;
+    public Content(SUBJECT subjects, boolean enabled) {
         this.subjects = subjects;
-        this.textMessage = textMessage;
+        this.enabled = enabled;
+
     }
 
+    public Content(SUBJECT subjects) {
+        this.subjects = subjects;
+    }
+
+    public Content(){}
 
     public int getId() {
         return id;
@@ -36,27 +35,29 @@ public class Content {
         this.id = id;
     }
 
-    public int getBookingRequestId() {
-        return bookingRequestId;
-    }
-
-    public void setBookingRequestId(int bookingRequestId) {
-        this.bookingRequestId = bookingRequestId;
-    }
-
-    public List<SUBJECT> getSubjects() {
+    public SUBJECT getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(List<SUBJECT> subjects) {
+    public void setSubjects(SUBJECT subjects) {
         this.subjects = subjects;
     }
 
-    public String getTextMessage() {
-        return textMessage;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setTextMessage(String textMessage) {
-        this.textMessage = textMessage;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    @Override
+    public String toString() {
+        return "Content{" +
+                "subject=" + subjects +
+                ", enabled=" + enabled +
+                '}';
     }
 }
+
+
