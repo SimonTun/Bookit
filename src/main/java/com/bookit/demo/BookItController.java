@@ -42,10 +42,7 @@ public class BookItController {
         boolean hasValues = timeslots.size() > 0;
 
         model.addAttribute("hasValues", hasValues);
-
-
         model.addAttribute("timeslots", timeslots);
-
 
         return "bookIt";
 
@@ -99,7 +96,9 @@ public class BookItController {
     @PostMapping("/bookIt")
     public String allSubject (@ModelAttribute ContentHolder contentHolder) {
 
-    System.out.println(contentHolder);
+        repository.newContent(contentHolder);
+
+
 
 
         return "bookIt";

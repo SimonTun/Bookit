@@ -9,6 +9,13 @@ h1{
 
 ul {list-style-type: none;}
 body {font-family: Helvetica, Arial, sans-serif;}
+.wrap {
+
+width=800px;
+margin=0px auto;
+background-color: #f7f7f7;
+
+}
 
 .startPage{
 
@@ -49,7 +56,7 @@ body {font-family: Helvetica, Arial, sans-serif;}
   position: relative;
   z-index: 0;
   margin: 50px;
-
+ 
 }
 
 .startPage button:hover{
