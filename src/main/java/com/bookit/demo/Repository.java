@@ -164,6 +164,22 @@ public class Repository {
         }
 
     }
+    public void getCustomerInformation(int bookingrequestId, int timeslotId) {
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT WHERE ID =?")) {
+            ps.setInt(1, bookingrequestId);
+            ResultSet rs = ps.executeQuery();
+
+//            if (rs.next()) {
+//                return rsTimeslot(rs);
+//            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+//        return null;
+    }
+
 
 
     public int addNewCustomer(Customer customer) {

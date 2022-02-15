@@ -28,10 +28,11 @@ public class BookItController {
         return "redirect:/";
     }
 
-    @GetMapping("/")
-    public String bookIt(Model model, @RequestParam(required = false) String date) throws ParseException {
+    @GetMapping("/bookit")
+    public String bookIt(Model model, HttpSession session, @RequestParam(required = false) String date) throws ParseException {
 
         ArrayList<Timeslot> timeslots;
+
 
         if (date == null || date.length() == 0) {
             System.out.println("no date = today");
@@ -48,7 +49,28 @@ public class BookItController {
 
     }
 
-    @GetMapping("/start")
+    @GetMapping("/confirm")
+    public String confirm(Model model, HttpSession session, @RequestParam(required = true) int id) throws ParseException {
+        System.out.println(id);
+
+        int bookingRequestId = (int) session.getAttribute("bookingRequestId");
+        int timeslotId = id;
+
+        Timeslot timeslot = repository.getTimeslot(id);
+        model.addAttribute("timeslot", timeslot);
+
+//        repository.getCustomerInformation(timeslotId, bookingRequestId);
+
+//        model.addAttribute("customerConfirmInformation", information);
+
+
+        return "confirmation";
+    }
+
+
+
+
+        @GetMapping("/start")
     public String bookItStart() {
 
         return "startPage";
