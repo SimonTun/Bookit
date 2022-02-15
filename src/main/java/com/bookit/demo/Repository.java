@@ -74,12 +74,12 @@ public class Repository {
         return timeslots;
     }
 
-    public int newBooking(int customerId, int timeslotId) {
+    public int newBooking(int BookingrequestID, int timeslotId) {
         int generatedId = 0;   // Kan inte skapa int = null
 
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("INSERT INTO Booking (CustomerId, TimeslotId) VALUES (?,?) ", Statement.RETURN_GENERATED_KEYS)) {
-            ps.setInt(1, customerId);
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO Booking (BookingrequestID, TimeslotId) VALUES (?,?) ", Statement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, BookingrequestID);
             ps.setInt(2, timeslotId);
             ps.executeUpdate();
 
