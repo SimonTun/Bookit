@@ -57,6 +57,19 @@ function availableTimes (id){
 let bookingDate = year + "-" + (month+1) + "-" + id;
 console.log(bookingDate);
 window.location.href="http://localhost:8080/?date=" + bookingDate +"";
+}
+
+function alertConfirm (id) {
+
+let continueConfirm = confirm("Vill du boka tiden?");
+    if (continueConfirm === true){
+        window.location.href="http://localhost:8080/confirm?id=" + id + "";
+}
+else{
+    window.location.href;
+
+}
+
 
 }
 
