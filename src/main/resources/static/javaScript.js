@@ -1,6 +1,9 @@
 
 
 let dt = new Date();
+let month = dt.getMonth();
+let year = dt.getFullYear();
+
 
 function renderDate() {
    dt.setDate(1);
@@ -24,7 +27,14 @@ function renderDate() {
    for (i = 1; i <= endDate; i++) {
        if (i == today.getDate() && dt.getMonth() == today.getMonth()) cells += "<div class='today'>" + i + "</div>";
        else
-           cells += "<div class='day' id= "+ i +" onclick=availableTimes('"+i+"')>" + i + "</div>";
+             cells += "<div class='day' id= "+ i +" onclick=availableTimes('"+i+"')>" + i + "</div>";
+
+// under här försökte jag få in länken direkt men det gick inte så vi går via en funktion istället.
+//           cells += "<div class='day' id= "+ i +" th:onclick=window.location.href="/?=2018-03-10">" + i + "</div>";
+
+
+//availableTimes('"+i+"')>" + i + "
+
 
    }
 
@@ -34,16 +44,20 @@ function renderDate() {
 function moveDate(para) {
    if(para == "prev") {
        dt.setMonth(dt.getMonth() - 1);
+       month = dt.getMonth();
    }
    else if(para == 'next') {
        dt.setMonth(dt.getMonth() + 1);
+       month = dt.getMonth();
    }
    renderDate();
 }
 
 function availableTimes (id){
-console.log("You pressed on a date, didn´t you!");
-console.log(id)
+let bookingDate = year + "-" + (month+1) + "-" + id;
+console.log(bookingDate);
+window.location.href="http://localhost:8080/?date=" + bookingDate +"";
+
 }
 
 

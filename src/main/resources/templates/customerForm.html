@@ -10,7 +10,7 @@
   <h1> Handelsbanken </h1>
 </div>
 <form action="/customerForm" th:object="${customer}" method="post" >
-  <p>Personnummer</p><input type="text" th:field="*{customerNumber}" value="" >
+  <p>Personnummer</p><input type="text" value="" th:field="*{customerNumber}">
   <p>Förnamn</p><input type="text" th:field="*{firstName}" >
   <p>Efternamn</p><input type="text" th:field="*{lastName}" class="test">
   <p>Telefonnummer</p><input type="text" th:field="*{phoneNumber}" class="test">

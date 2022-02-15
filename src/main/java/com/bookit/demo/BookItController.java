@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.security.auth.Subject;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.util.List;
@@ -84,7 +85,7 @@ public class BookItController {
     @GetMapping("/subjects")
     public String subjects(Model model, HttpSession session) {
 
-        model.addAttribute("contents", new Content());
+  //      model.addAttribute("contents", new Content());
         model.getAttribute("customerId");
         model.getAttribute("bookingId");
 

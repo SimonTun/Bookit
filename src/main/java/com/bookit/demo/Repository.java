@@ -13,7 +13,6 @@ public class Repository {
     @Autowired
     private DataSource dataSource;
 
-
     public ArrayList<Timeslot> getEmptyTimeslots() {
 
         ArrayList<Timeslot> timeslots = new ArrayList<>();

@@ -7,34 +7,33 @@ h1{
   color: #1b9dc3;
 }
 
-ul {list-style-type: none;}
-body {font-family: Helvetica, Arial, sans-serif;}
+.wrap {
+
+width=800px;
+margin=0px auto;
+background-color: #f7f7f7;
+
+}
 
 .startPage{
 
-    position: relative;
-    width: 100%;
-    background-image: url(LundCity.jpg);
-    background-size: cover;
-    height: 1000px;
-    width: 650px;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    font-family: Helvetica, Arial, sans-serif;
+       background-image: url(LundCity.jpg);
+       background-repeat: no-repeat;
 
 }
 
 .startPage button{
-    position: relative;
-    left: 661px;
-    top: 688px;
+    position: inherit;
+    margin-left: 528px;
+    margin-top: 544px;
+    margin-top: 416px
+    margin-left: 192px;
     display: inline-block;
     padding: 12px 40px;
-    border: 2px solid #005fa5;
+    border: 2px solid #87b0c2;
     color: #005fa5;
     border-radius: 4px;
-    margin-bottom: 20px;
+    margin-bottom: 100%;
     line-height: 18px;
     background-color: transparent;
     font-size: 16px;
@@ -47,7 +46,7 @@ body {font-family: Helvetica, Arial, sans-serif;}
   position: relative;
   z-index: 0;
   margin: 50px;
- 
+
 }
 
 .startPage button:hover{
