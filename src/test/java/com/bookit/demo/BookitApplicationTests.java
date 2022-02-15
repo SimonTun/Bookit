@@ -103,11 +103,12 @@ class BookitApplicationTests {
         int numberOfBookings = repo.numberOfBookings();
 
         int newCustomerId = repo.addNewCustomer(new Customer(8805050375L, "Simon", "Stark", null, null));
+        int newBookingRequestId = repo.addNewBookingRequestId(newCustomerId);
         int newTimeslotId = repo.newTimeslot(1, "2022-02-28", "13:35:00", "14:15:00");
         System.out.println("New customerID: " + newCustomerId);
         System.out.println("New TimeslotID: " + newTimeslotId);
 
-        int newBookingID = repo.newBooking(newCustomerId, newTimeslotId);
+        int newBookingID = repo.newBooking(newBookingRequestId, newTimeslotId);
 
         System.out.println("\n--- A new booking with id nr " + newBookingID + " is successfully created ---\n");
 
