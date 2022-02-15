@@ -22,6 +22,8 @@ public class BookItController {
     @Autowired
     BookitService service;
 
+
+
     @GetMapping("/")
     public String bookIt(Model model, @RequestParam (required = false) String date) {
 
@@ -36,8 +38,6 @@ public class BookItController {
         else
         timeslots = repository.getEmptyTimeslotsOnDate(date);
 
-
-
         model.addAttribute("timeslots", timeslots);
 
 
@@ -48,20 +48,19 @@ public class BookItController {
 
     @GetMapping("/customer")
     public String privat(Model model, HttpSession session) {
+
         model.addAttribute("customer", new Customer());
         return "customerForm";
     }
 
 
     @PostMapping("/customerForm")
-    public String privatForm (Model model, @ModelAttribute Customer customer) {
+    public String privatForm (Model model, @ModelAttribute Customer customer, HttpSession session) {
         model.addAttribute("customer",customer);
-        int customerId =repository.addNewCustomer(customer);
-       int bookingId= repository.addNewBookingRequestId(customerId);
+         int customerId =repository.addNewCustomer(customer);
+        int bookingId= repository.addNewBookingRequestId(customerId);
 
-        model.addAttribute("customerId",customerId);
-        model.addAttribute("bookingId",bookingId);
-
+        session.setAttribute("customerId", customerId);
         return "confirmation";
     }
 
@@ -69,21 +68,25 @@ public class BookItController {
     @GetMapping("/subjects")
     public String subjects(Model model, HttpSession session){
 
-        model.addAttribute("contents", new Content());
-      model.getAttribute("customerId");
-        model.getAttribute("bookingId");
+        List <Content> contents = new ArrayList<>();
+        for (SUBJECT subject : SUBJECT.values()){
+            contents.add(new Content(subject));
+        }
+            int customerId = (int) session.getAttribute("customerId");
+        BookingRequest bookingRequest = new BookingRequest(customerId,contents,"");
+
+        model.addAttribute("bookingRequest", bookingRequest);
 
         return "subjectForm";
     }
 
 
     @PostMapping("/bookIt")
-    public String allSubject (Model model, @ModelAttribute Content content) {
+    public String allSubject (@ModelAttribute BookingRequest bookingRequest) {
 
-    System.out.println(content.id);
-        System.out.println(content.bookingRequestId);
-        System.out.println(content.getSubjects());
-        System.out.println(content.getTextMessage());
+    System.out.println(bookingRequest);
+
+
 
         return "confirmation";
     }

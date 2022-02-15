@@ -8,14 +8,26 @@
 <body>
 <h1>Handelsbanken</h1>
 <h3> Vad vill du ha rådgivning om?</h3>
-<form action="/bookIt" method="post" th:object="${contents}">
-    <input type="hidden" th:field="*{id}"  th:name="customerId"/>
-    <div th:each="contentOpt : ${T(com.bookit.demo.SUBJECT).values()}">
-        <input type="checkbox"th:value="${contentOpt}" th:text="${contentOpt}"/>
+<form action="/bookIt" method="post" th:object="${bookingRequest}">
+       Kund <input type="text" th:field="*{customerId}">
+
+    <div>
+        <div th:each="content, itemStat : *{contents}">
+            <span th:text="${content.subjects}"></span>
+            <input type="hidden" th:field="*{contents[__${itemStat.index}__].subjects}"/>
+            <input type="checkbox" th:field="*{contents[__${itemStat.index}__].enabled}"/>
+        </div>
     </div>
-       <p>Övrig information<p/>
-    <textarea name="textMessage" th:field="*{textMessage}" rows="7" cols="39"></textarea>
-<p></p>
+
+    <p>  Övrig information</p><textarea type="text" th:field="*{textMessage}" rows="7" cols="39" > </textarea>
+
+<!--    <input type="hidden" th:field="*{id}"  th:name="customerId"/>-->
+<!--    <div th:each="contentOpt : ${T(com.bookit.demo.SUBJECT).values()}">-->
+<!--        <input type="checkbox"th:value="${contentOpt}" th:text="${contentOpt}"/>-->
+<!--    </div>-->
+<!--       <p>Övrig information<p/>-->
+<!--    <textarea name="textMessage" th:field="*{textMessage}" rows="7" cols="39"></textarea>-->
+<!--<p></p>-->
 <input value="Nästa sida" type="submit"/>
 </form>
 </body>

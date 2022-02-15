@@ -73,11 +73,6 @@ class BookitApplicationTests {
         Assertions.assertEquals(repo.getEmptyTimeslots().size(), repo.numberOfEmptyTimeslots());
     }
 
-    @Test
-    void testday() {
-        Assertions.assertEquals("2022-02-11", service.getTodaysDate());
-
-    }
 
     @Test
     void addNewCustomerToNewEmptyTimeslotAndCreateNewBooking() {
