@@ -8,13 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.security.auth.Subject;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.util.List;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 @Controller
 public class BookItController {
@@ -67,38 +64,42 @@ public class BookItController {
 
 
     @PostMapping("/customerForm")
-    public String privatForm(Model model, @ModelAttribute Customer customer) {
-        model.addAttribute("customer", customer);
-        int customerId = repository.addNewCustomer(customer);
-        int bookingId = repository.addNewBookingRequestId(customerId);
+    public String privatForm (Model model, @ModelAttribute Customer customer, HttpSession session) {
+        model.addAttribute("customer",customer);
+         int customerId =repository.addNewCustomer(customer);
+        int bookingRequestId= repository.addNewBookingRequestId(customerId);
 
-        model.addAttribute("customerId", customerId);
-        model.addAttribute("bookingId", bookingId);
+        session.setAttribute("customerId", customerId);
+        session.setAttribute("bookingRequestId",bookingRequestId);
 
-        return "confirmation";
+
+        return "redirect:/subjects";
     }
 
 
     @GetMapping("/subjects")
-    public String subjects(Model model, HttpSession session) {
+    public String subjects(Model model, HttpSession session){
 
-  //      model.addAttribute("contents", new Content());
-        model.getAttribute("customerId");
-        model.getAttribute("bookingId");
+        List <Content> contents = new ArrayList<>();
+        for (SUBJECT subject : SUBJECT.values()){
+            contents.add(new Content(subject));
+        }
+            int customerId = (int) session.getAttribute("customerId");
+        int bookingRequestId =(int)session.getAttribute("bookingRequestId");
+        ContentHolder contentHolder = new ContentHolder(bookingRequestId,contents,"");
+        model.addAttribute("contentHolder", contentHolder);
 
         return "subjectForm";
     }
 
 
     @PostMapping("/bookIt")
-    public String allSubject(Model model, @ModelAttribute Content content) {
+    public String allSubject (@ModelAttribute ContentHolder contentHolder) {
 
-        System.out.println(content.id);
-        System.out.println(content.bookingRequestId);
-        System.out.println(content.getSubjects());
-        System.out.println(content.getTextMessage());
+    System.out.println(contentHolder);
 
-        return "confirmation";
+
+        return "bookIt";
     }
 
 }
