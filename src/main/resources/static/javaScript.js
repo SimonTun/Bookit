@@ -25,7 +25,8 @@ function renderDate() {
 
    console.log(day);
    for (i = 1; i <= endDate; i++) {
-       if (i == today.getDate() && dt.getMonth() == today.getMonth()) cells += "<div class='today'>" + i + "</div>";
+       if (i == today.getDate() && dt.getMonth() == today.getMonth()) cells += "<div class='today' id= "+ i +
+                                                                    " onclick=availableTimes('"+i+"')>" + i + "</div>";
        else
              cells += "<div class='day' id= "+ i +" onclick=availableTimes('"+i+"')>" + i + "</div>";
 
