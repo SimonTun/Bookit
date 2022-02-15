@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.security.auth.Subject;
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
 import java.util.List;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Controller
 public class BookItController {
@@ -22,21 +25,27 @@ public class BookItController {
     @Autowired
     BookitService service;
 
-
+    @GetMapping("/generate")
+    public String generate(@RequestParam(required = false, defaultValue = "1") int num) throws ParseException {
+        service.generateTimeslots(num);
+        return "redirect:/";
+    }
 
     @GetMapping("/")
-    public String bookIt(Model model, @RequestParam (required = false) String date) {
+    public String bookIt(Model model, @RequestParam(required = false) String date) throws ParseException {
 
-        ArrayList<Timeslot> timeslots = new ArrayList<>();
-
-
+        ArrayList<Timeslot> timeslots;
 
         if (date == null || date.length() == 0) {
             System.out.println("no date = today");
-            timeslots = repository.getEmptyTimeslotsOnDate(service.getTodaysDate());
-        }
-        else
-        timeslots = repository.getEmptyTimeslotsOnDate(date);
+            timeslots = service.prepareTimeslotArrayForPresentationOnWeb(service.getTodaysDate());
+        } else
+            timeslots = service.prepareTimeslotArrayForPresentationOnWeb(date);
+
+        boolean hasValues = timeslots.size() > 0;
+
+        model.addAttribute("hasValues", hasValues);
+
 
         model.addAttribute("timeslots", timeslots);
 
@@ -45,10 +54,16 @@ public class BookItController {
 
     }
 
+    @GetMapping("/start")
+    public String bookItStart() {
+
+        return "startPage";
+
+    }
+
 
     @GetMapping("/customer")
-    public String privat(Model model, HttpSession session) {
-
+    public String privat(Model model) {
         model.addAttribute("customer", new Customer());
         return "customerForm";
     }
@@ -85,7 +100,6 @@ public class BookItController {
     public String allSubject (@ModelAttribute BookingRequest bookingRequest) {
 
     System.out.println(bookingRequest);
-
 
 
         return "confirmation";
