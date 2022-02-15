@@ -3,29 +3,41 @@ package com.bookit.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookingRequest {
+public class ContentHolder {
     int id;
-    int customerId;
+    int bookingRequestId;
     private List<Content> contents= new ArrayList<>();
     private String textMessage;
 
 
-    public BookingRequest(int id, int customerId, List<Content> contents, String textMessage) {
+    public ContentHolder(int id, int bookingRequestId, List<Content> contents, String textMessage) {
         this.id = id;
-        this.customerId = customerId;
+        this.bookingRequestId = bookingRequestId;
         this.contents = contents;
         this.textMessage=textMessage;
     }
 
-    public BookingRequest( int customerId, List<Content> contents, String textMessage) {
-        this.customerId = customerId;
+    public ContentHolder(int bookingRequestId, List<Content> contents, String textMessage) {
+        this.bookingRequestId = bookingRequestId;
         this.contents = contents;
         this.textMessage=textMessage;
 
     }
 
-    public BookingRequest (){
+    public ContentHolder(){
 
+    }
+    public ContentHolder(int bookingRequestId){
+        this.bookingRequestId=bookingRequestId;
+
+    }
+
+    public int getBookingRequestId() {
+        return bookingRequestId;
+    }
+
+    public void setBookingRequestId(int bookingRequestId) {
+        this.bookingRequestId = bookingRequestId;
     }
 
     public int getId() {
@@ -36,13 +48,7 @@ public class BookingRequest {
         this.id = id;
     }
 
-    public int getCustomerId() {
-        return customerId;
-    }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
 
     public List<Content> getContents() {
         return contents;
@@ -63,7 +69,7 @@ public class BookingRequest {
     @Override
     public String toString() {
         return "BookingRequest{" +
-                "customerId=" + customerId +
+                "bookingRequestId=" + bookingRequestId +
                 ", Content=" + contents +
                 ", TextMessage=" + textMessage +
                 '}';
