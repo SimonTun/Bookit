@@ -20,34 +20,23 @@ public class BookitService {
     @Autowired
     Repository repo;
 
-
     public String getTodaysDate() {
-
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return (date.format(formatter));
     }
 
     public ArrayList<Timeslot> prepareTimeslotArrayForPresentationOnWeb(String date) throws ParseException {
-
         // First - get ArrayList on correct day
         ArrayList<Timeslot> preparedList = repo.getEmptyTimeslotsOnDate(date);
-
         // Second - remove duplicates
         preparedList = hideDuplicateTimeslots(preparedList);
-
         // Third - Parse time from HH:MM:SS to HH:MM
-
         preparedList = parseTimeslotTimesToHHMM(preparedList);
-
         return preparedList;
-
-
     }
 
-
     public void generateTimeslots(int numOfDaysFromToday) throws ParseException {
-
         int num = 0;
         int employee = 0;
         LocalDate today = LocalDate.now();
@@ -78,8 +67,6 @@ public class BookitService {
     }
 
     public String parseTimeToHHMM(String time) throws ParseException {
-
-
         SimpleDateFormat df = new SimpleDateFormat("HH:mm");
         Date d = df.parse(time);
         Calendar cal = Calendar.getInstance();
@@ -92,9 +79,7 @@ public class BookitService {
     public ArrayList<Timeslot> parseTimeslotTimesToHHMM(ArrayList<Timeslot> timeslots) throws ParseException {
 
         ArrayList<Timeslot> parsedTimes;
-
         parsedTimes = (ArrayList)timeslots.clone();
-
 
         String oldStartTime;
         String oldEndTime;
@@ -106,17 +91,12 @@ public class BookitService {
             System.out.println(parsedTime.getStartTime());
             oldEndTime = parsedTime.getEndTime();
             parsedTime.setEndTime(parseTimeToHHMM(oldEndTime));       }
-
-
         return parsedTimes;
-
     }
 
     public ArrayList<Timeslot> hideDuplicateTimeslots(ArrayList<Timeslot> timeslots) {
-
         ArrayList<Timeslot> noDuplicates = new ArrayList<>();
         if (timeslots.size()==0) return noDuplicates;
-
         boolean isDuplicate;
 
         noDuplicates.add(timeslots.get(0));

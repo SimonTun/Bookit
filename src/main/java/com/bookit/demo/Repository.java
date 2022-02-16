@@ -13,8 +13,6 @@ public class Repository {
     @Autowired
     private DataSource dataSource;
 
-
-
     public ArrayList<Timeslot> getEmptyTimeslots() {
 
         ArrayList<Timeslot> timeslots = new ArrayList<>();
@@ -29,7 +27,6 @@ public class Repository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
         return timeslots;
     }
@@ -383,6 +380,23 @@ public class Repository {
                 rs.getString("PhoneNumber"),
                 rs.getString("Email"));
 
+    }
+
+    public ArrayList<Timeslot> getEmployeesBookings(int id) {
+
+        ArrayList<Timeslot> employeesTimeslots = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT WHERE EMPLOYEEID =? ")) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                employeesTimeslots.add(rsTimeslot(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employeesTimeslots;
     }
 
 

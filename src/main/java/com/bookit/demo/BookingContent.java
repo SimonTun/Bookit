@@ -5,7 +5,6 @@ import java.util.List;
 
 public class BookingContent {
 
-
     private String date;
     private String startTime;
     private String endTime;
@@ -27,7 +26,6 @@ public class BookingContent {
         this.pictureName = pictureName;
         this.videoLink = videoLink;
     }
-
 
     public String getDate() {
         return date;

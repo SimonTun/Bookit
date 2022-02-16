@@ -18,7 +18,6 @@ public class BookItController {
 
     @Autowired
     Repository repository;
-
     @Autowired
     BookitService service;
 
@@ -30,9 +29,7 @@ public class BookItController {
 
     @GetMapping("/bookIt")
     public String bookIt(Model model, HttpSession session, @RequestParam(required = false) String date) throws ParseException {
-
         ArrayList<Timeslot> timeslots;
-
 
         if (date == null || date.length() == 0) {
             System.out.println("no date = today");
@@ -41,12 +38,9 @@ public class BookItController {
             timeslots = service.prepareTimeslotArrayForPresentationOnWeb(date);
 
         boolean hasValues = timeslots.size() > 0;
-
         model.addAttribute("hasValues", hasValues);
         model.addAttribute("timeslots", timeslots);
-
         return "bookIt";
-
     }
 
     @GetMapping("/confirm")
@@ -60,21 +54,13 @@ public class BookItController {
         model.addAttribute("timeslot", timeslot);
 
         BookingContent bookingContent=repository.createBookingContent(timeslotId,bookingRequestId);
-
         model.addAttribute("bookingContent", bookingContent);
-
-
         return "confirm";
     }
 
-
-
-
         @GetMapping("/start")
     public String bookItStart() {
-
         return "startPage";
-
     }
 
 
@@ -84,7 +70,6 @@ public class BookItController {
         return "customerForm";
     }
 
-
     @PostMapping("/customerForm")
     public String privatForm (Model model, @ModelAttribute Customer customer, HttpSession session) {
         model.addAttribute("customer",customer);
@@ -93,11 +78,8 @@ public class BookItController {
 
         session.setAttribute("customerId", customerId);
         session.setAttribute("bookingRequestId",bookingRequestId);
-
-
         return "redirect:/subjects";
     }
-
 
     @GetMapping("/subjects")
     public String subjects(Model model, HttpSession session){
@@ -110,19 +92,12 @@ public class BookItController {
         int bookingRequestId =(int)session.getAttribute("bookingRequestId");
         ContentHolder contentHolder = new ContentHolder(bookingRequestId,contents,"");
         model.addAttribute("contentHolder", contentHolder);
-
         return "subjectForm";
     }
 
-
     @PostMapping("/bookIt")
     public String allSubject (@ModelAttribute ContentHolder contentHolder) {
-
         repository.newContent(contentHolder);
-
-
-
-
         return "bookIt";
     }
 
