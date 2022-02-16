@@ -5,8 +5,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 class BookitApplicationTests {
@@ -103,17 +108,44 @@ class BookitApplicationTests {
         int numberOfBookings = repo.numberOfBookings();
 
         int newCustomerId = repo.addNewCustomer(new Customer(8805050375L, "Simon", "Stark", null, null));
+        int newBookingRequestId = repo.addNewBookingRequestId(newCustomerId);
         int newTimeslotId = repo.newTimeslot(1, "2022-02-28", "13:35:00", "14:15:00");
         System.out.println("New customerID: " + newCustomerId);
         System.out.println("New TimeslotID: " + newTimeslotId);
 
-        int newBookingID = repo.newBooking(newCustomerId, newTimeslotId);
+        int newBookingID = repo.newBooking(newBookingRequestId, newTimeslotId);
 
         System.out.println("\n--- A new booking with id nr " + newBookingID + " is successfully created ---\n");
 
         Assertions.assertEquals(numberOfBookings + 1, repo.numberOfBookings());
 
     }
+
+
+//    @Test
+//    void addContentToContent() {
+//
+//        // Testet är godkänt när antalet bookings har ökat med 1
+//
+//        int numberOfBookings = repo.numberOfBookings();
+//
+//        int newCustomerId = repo.addNewCustomer(new Customer(8805050375L, "Simon", "Stark", null, null));
+//        int newBookingRequestId = repo.addNewBookingRequestId(newCustomerId);
+//
+//        List<Content> contents = new ArrayList<>();
+//        contents.add(new Content(newBookingRequestId, SUBJECT.CAPITALSAVINGS, true));
+//        contents.add(new Content(newBookingRequestId, SUBJECT.CAPITALSAVINGS, false));
+//        contents.add(new Content(newBookingRequestId, SUBJECT.MORTAGES, true));
+//        contents.add(new Content(newBookingRequestId, SUBJECT.INSURANCE, false));
+//        contents.add(new Content(newBookingRequestId, SUBJECT.CHILDSAVINGS, true));
+//
+//        ContentHolder contentHolder = new ContentHolder(newBookingRequestId, contents, "Jag funkar!");
+//        repo.newContent(contentHolder);
+//
+//
+//    }
+
+
 
     @Test
     void hideDuplicateTimeslots() {

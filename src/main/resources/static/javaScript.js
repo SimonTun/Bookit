@@ -12,14 +12,14 @@ function renderDate() {
    let endDate = new Date(dt.getFullYear(), dt.getMonth() + 1,0).getDate();
    let prevDate = new Date(dt.getFullYear(), dt.getMonth(), 0).getDate();
 
-   let months = ["January", "February", "March", "April", "May", "June", "July",
-               "August", "September", "October", "November","December"]
+   let months = ["Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli",
+                  "Augusti", "September", "Oktober", "November", "December"]
 
    document.getElementById("month").innerHTML = months[dt.getMonth()];
    document.getElementById("date_str").innerHTML = dt.toDateString();
 
    let cells = "";
-   for (x = day; x > 0; x--) {
+   for (x = day; x > 1; x--) {
        cells += "<div class='prev_date'>" + (prevDate - x + 1) + "</div>";
    }
 
@@ -56,7 +56,7 @@ function moveDate(para) {
 function availableTimes (id){
 let bookingDate = year + "-" + (month+1) + "-" + id;
 console.log(bookingDate);
-window.location.href="http://localhost:8080/?date=" + bookingDate +"";
+window.location.href="http://localhost:8080/bookIt/?date=" + bookingDate +"";
 
 }
 
