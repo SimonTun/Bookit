@@ -13,6 +13,34 @@
 </head>
 
 <body>
+
+<div>
+    <h1> Handelsbanken </h1>
+</div>
+<div class="line">
+
+</div>
+
+<div class="progressbar">
+    <p >
+        Dina uppgifter
+    </p>
+
+    <p>
+        Agenda
+    </p>
+
+    <p>
+        Datum och tid
+    </p>
+
+    <p class="show">
+        Bekräftelse
+    </p>
+
+</div>
+
+
     <p class="content">
 
     <div class="article-top">
@@ -24,6 +52,8 @@
     </div>
 
         <h3>Mötesdetaljer</h3>
+
+    <div class="customerForm">
 
         Datum: <p th:text=" ${bookingContent.date}"> </p>
 
@@ -54,7 +84,7 @@
 
     Länk till mötet: </br>
     <a  th:text="${bookingContent.videoLink}" th:href="${bookingContent.videoLink}"></a>
-
+    </div>
 
     </body>
 </html>
