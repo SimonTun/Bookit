@@ -25,7 +25,8 @@ function renderDate() {
 
    console.log(day);
    for (i = 1; i <= endDate; i++) {
-       if (i == today.getDate() && dt.getMonth() == today.getMonth()) cells += "<div class='today'>" + i + "</div>";
+       if (i == today.getDate() && dt.getMonth() == today.getMonth()) cells += "<div class='today' id= "+ i +
+                                                                    " onclick=availableTimes('"+i+"')>" + i + "</div>";
        else
              cells += "<div class='day' id= "+ i +" onclick=availableTimes('"+i+"')>" + i + "</div>";
 
@@ -56,20 +57,7 @@ function moveDate(para) {
 function availableTimes (id){
 let bookingDate = year + "-" + (month+1) + "-" + id;
 console.log(bookingDate);
-window.location.href="http://localhost:8080/?date=" + bookingDate +"";
-}
-
-function alertConfirm (id) {
-
-let continueConfirm = confirm("Vill du boka tiden?");
-    if (continueConfirm === true){
-        window.location.href="http://localhost:8080/confirm?id=" + id + "";
-}
-else{
-    window.location.href;
-
-}
-
+window.location.href="http://localhost:8080/bookIt/?date=" + bookingDate +"";
 
 }
 

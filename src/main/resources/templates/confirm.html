@@ -13,7 +13,35 @@
 </head>
 
 <body>
-    <div class="content">
+
+<div>
+    <h1> Handelsbanken </h1>
+</div>
+<div class="line">
+
+</div>
+
+<div class="progressbar">
+    <p >
+        Dina uppgifter
+    </p>
+
+    <p>
+        Agenda
+    </p>
+
+    <p>
+        Datum och tid
+    </p>
+
+    <p class="show">
+        Bekräftelse
+    </p>
+
+</div>
+
+
+    <p class="content">
 
     <div class="article-top">
         <h1 class="headline-top" style="margin-bottom: 4px;">Bekräfta din bokning</h1>
@@ -23,22 +51,40 @@
         </div>
     </div>
 
-    
-
         <h3>Mötesdetaljer</h3>
 
-        <div th:object="${timeslot}">
-            <div th:text=""></div>
+    <div class="customerForm">
 
+        Datum: <p th:text=" ${bookingContent.date}"> </p>
+
+        <div>
+           Tid:    <p th:text= "${bookingContent.startTime}"></p>
+            <div th:text="${bookingContent.endTime}"> </div>
 
         </div>
 
-        Rådgivare i mötet<br>
+             <div>
+                 <p>Agenda:</p>
+                <div th:each="content : *{bookingContent.contents}">
+                    <span th:text="${content}"></span>
+                </tr>
+            </div>
+
+            Övrig information:<p  th:text=" ${bookingContent.textMessage}"></p>
+
+
+        Rådgivare: <br>
 
     <div class="chip">
-        <img src="../static/1523527053121.jfif" alt="Person" width="96" height="96">
-        Simon Tunstig
+        <img src="../static/lwam.jpg" alt="Person" width="96" height="96">
+        <div th:text="${bookingContent.employeeFirstName}"></div>
+        <div th:text="${bookingContent.employeeLastName}"></div>
       </div>
     </div>
-     
-</body>
+
+    Länk till mötet: </br>
+    <a  th:text="${bookingContent.videoLink}" th:href="${bookingContent.videoLink}"></a>
+    </div>
+
+    </body>
+</html>
