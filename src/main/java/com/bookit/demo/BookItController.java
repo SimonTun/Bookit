@@ -63,10 +63,7 @@ public class BookItController {
 
         model.addAttribute("bookingContent", bookingContent);
 
-        System.out.println(bookingContent.getContents().get(0));
-        System.out.println(bookingContent.getContents().get(1));
-        System.out.println(bookingContent.getContents().get(2));
-        System.out.println(bookingContent.getContents().get(3));
+
         return "confirm";
     }
 

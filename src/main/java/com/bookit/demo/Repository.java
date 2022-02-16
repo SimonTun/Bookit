@@ -127,7 +127,7 @@ public class Repository {
 
         for (int i = 0; i < content.getContents().size(); i++) {
             if (content.getContents().get(i).isEnabled()) {
-                value = content.getContents().get(i).getSubjects().name();
+                value = content.getContents().get(i).getSubjects().getDisplayValue();
 
                 try (Connection conn = dataSource.getConnection();
                      PreparedStatement ps = conn.prepareStatement("INSERT INTO CONTENT (BookingRequestId, content) VALUES (?,?) ")) {

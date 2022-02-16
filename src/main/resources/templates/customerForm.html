@@ -9,15 +9,48 @@
 <div>
   <h1> Handelsbanken </h1>
 </div>
+<div class="line">
+
+</div>
+
+<div class="progressbar">
+    <p class="show">
+      Dina uppgifter
+    </p>
+
+    <p>
+      Agenda
+    </p>
+
+    <p>
+      Datum och tid
+    </p>
+
+    <p>
+      Bekräftelse
+    </p>
+
+</div>
+
+
+<div class="privateOrBusiness">
+    <h3> Fyll i dina personliga uppgifter</h3>
+    <p>I nästa steg kommer du välja vilken agenda du önskar för mötet.</p>
+
+</div>
+
+
+<div class="customerForm">
 <form action="/customerForm" th:object="${customer}" method="post" >
   <p>Förnamn</p><input type="text" required th:field="*{firstName}" >
   <p>Efternamn</p><input type="text" required th:field="*{lastName}" class="test">
   <p>Telefonnummer</p><input type="text" required th:field="*{phoneNumber}" class="test">
   <p>Email adress</p><input pattern="[A-Ö0-9._%+-]+@[A-Ö0-9.-]+\.[A-Ö]{2,4}$" type="email" required th:field="*{email}" class="test">
-  <input class="btn btn-primary btn-lg px-4 me-md-2" type="submit" value="Nästa sida">
+  <input class="buttonForm" type="submit" value="Nästa sida">
 </form>
 
 
 
+</div>
 </body>
 </html>
