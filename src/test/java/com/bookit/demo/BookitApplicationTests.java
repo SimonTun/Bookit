@@ -35,7 +35,7 @@ class BookitApplicationTests {
 
     @Test
     void addNewCustomerAndConfirmEntries() {
-        int id = repo.addNewCustomer(new Customer(6505050101L, "Peter", "DenStore", "040-77 88 99", "peter@sj.se"));
+        int id = repo.addNewCustomer(new Customer("Peter", "DenStore", "040-77 88 99", "peter@sj.se"));
         int bookingId = repo.addNewBookingRequestId(id);
 
         System.out.println("\n--- A new customer with bookingid nr " + bookingId + " is successfully created ---\n");
@@ -43,7 +43,6 @@ class BookitApplicationTests {
 
         Customer test = repo.getCustomer(id);
 
-        Assertions.assertEquals(6505050101L, test.getCustomerNumber());
         Assertions.assertEquals("Peter", test.getFirstName());
         Assertions.assertEquals("DenStore", test.getLastName());
         Assertions.assertEquals("040-77 88 99", test.getPhoneNumber());
@@ -103,7 +102,7 @@ class BookitApplicationTests {
 
         int numberOfBookings = repo.numberOfBookings();
 
-        int newCustomerId = repo.addNewCustomer(new Customer(8805050375L, "Simon", "Stark", null, null));
+        int newCustomerId = repo.addNewCustomer(new Customer("Simon", "Stark", null, null));
         int newBookingRequestId = repo.addNewBookingRequestId(newCustomerId);
         int newTimeslotId = repo.newTimeslot(1, "2022-02-28", "13:35:00", "14:15:00");
         System.out.println("New customerID: " + newCustomerId);

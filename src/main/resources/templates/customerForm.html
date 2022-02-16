@@ -10,12 +10,14 @@
   <h1> Handelsbanken </h1>
 </div>
 <form action="/customerForm" th:object="${customer}" method="post" >
-  <p>Personnummer</p><input type="text" value="" th:field="*{customerNumber}">
-  <p>Förnamn</p><input type="text" th:field="*{firstName}" >
-  <p>Efternamn</p><input type="text" th:field="*{lastName}" class="test">
-  <p>Telefonnummer</p><input type="text" th:field="*{phoneNumber}" class="test">
-  <p>Email adress</p><input type="text" th:field="*{email}" class="test">
+  <p>Förnamn</p><input type="text" required th:field="*{firstName}" >
+  <p>Efternamn</p><input type="text" required th:field="*{lastName}" class="test">
+  <p>Telefonnummer</p><input type="text" required th:field="*{phoneNumber}" class="test">
+  <p>Email adress</p><input pattern="[A-Ö0-9._%+-]+@[A-Ö0-9.-]+\.[A-Ö]{2,4}$" type="email" required th:field="*{email}" class="test">
   <input class="btn btn-primary btn-lg px-4 me-md-2" type="submit" value="Nästa sida">
 </form>
+
+
+
 </body>
 </html>

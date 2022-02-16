@@ -15,7 +15,6 @@ CREATE TABLE Timeslot(
 
 CREATE TABLE Customer(
   Id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  SocialSecurityNumber BIGINT,
   FirstName VARCHAR(64),
   LastName VARCHAR(64),
   Email VARCHAR(64),
