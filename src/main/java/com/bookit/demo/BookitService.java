@@ -45,7 +45,6 @@ public class BookitService {
 
     }
 
-
     public void generateTimeslots(int numOfDaysFromToday) throws ParseException {
 
         int num = 0;
@@ -135,5 +134,8 @@ public class BookitService {
         }
         return noDuplicates;
     }
+
+
+
 
 }

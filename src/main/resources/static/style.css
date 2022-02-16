@@ -1,7 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
 h1{
   font-family: Helvetica, Arial, sans-serif;
   color: #1b9dc3;
@@ -42,39 +38,11 @@ background-color: #f7f7f7;
 
 }
 
-.content {
-  position: relative;
-  z-index: 0;
-  margin: 50px;
-
-}
-
 .startPage button:hover{
   background-color:#f1f1f1;
   color: grey;
   text-decoration: underline;
 
-}
-.article-top {
-  text-align: center;
-  max-width: 860px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
-.headline-top {
-
-  font-family: SHB_SlabSerifLight, Georgia, sans-serif;
-  font-size: 42px;
-  color: #017ab2;
-}
-
-.headline-tagline {
-line-height: 30px;
-font-family: SHB_SlabSerifLight, Georgia, sans-serif;
-font-size: 24px;
-color: #222;
 }
 
 .privateOrBusiness {
@@ -90,7 +58,8 @@ color: #222;
 }
 
 
-
+ul {list-style-type: none;}
+body {font-family: Helvetica, Arial, sans-serif;}
 
 /* Calender */
 
@@ -101,10 +70,7 @@ color: #222;
     display: flex;
     }
     .calendar {
-    margin-top: 50px;
-    margin-right: auto;
-    margin-bottom: auto;
-    margin-left: auto;
+    margin: auto;
     width: 600px;
     background-color: #fff;
     box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.2);
@@ -161,8 +127,6 @@ color: #222;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 10px;
-    margin-right: 10px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -185,63 +149,25 @@ color: #222;
 
 .slots {
   padding: 10px 0;
-  background: #FFFFFF;
-  margin: auto;
+  background: #eee;
+  margin: 0;
   text-align: center;
-  max-width: 800px;
-  align: center;
 
 }
-a { color: inherit;
-    text-decoration: none;
- }
 
 .slots li {
-    background-color: #1b9dc3;
-    padding: 12px 20px 12px 20px;
-    list-style-type: none;
-    display: inline-block;
-    text-align: center;
-    margin: 13px;
-    font-size: 15px;
-    border-radius: 50px;
-    color: white;
-    text-decoration: none;
-}
-
-.slots:hover li:hover {
-    background-color: #1b9dc3c7;
-    padding: 12px 20px 12px 20px;
-    list-style-type: none;
-    display: inline-block;
-    text-align: center;
-    margin: 13px;
-    font-size: 15px;
-    border-radius: 50px;
-    color: white;
+  background-color: #1b9dc3;
+      padding: 19px;
+      list-style-type: none;
+      display: inline-block;
+      text-align: center;
+      margin: 20px;
+      font-size: 15px;
+      border-radius: 35%;
+      color: white;
 }
 
 /* Highlight the "free slot" */
 .slots .active {
   color: #1b9dc3;
-}
-
-/* Chip */
-
-.chip {
-  display: inline-block;
-  padding: 0 25px;
-  height: 50px;
-  font-size: 16px;
-  line-height: 50px;
-  border-radius: 25px;
-  background-color: #f1f1f1;
-}
-
-.chip img {
-  float: left;
-  margin: 0 10px 0 -25px;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
 }

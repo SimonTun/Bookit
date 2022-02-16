@@ -5,10 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,22 +50,22 @@ class BookitApplicationTests {
         Assertions.assertEquals("peter@sj.se", test.getEmail());
     }
 
-    @Test
-    void parseTime() throws ParseException {
-
-        Assertions.assertEquals("19:50", service.parseTimeToHHMM("19:50:51"));
-    }
-
-
-    @Test
-    void parseTimesInTimeslotArray() throws ParseException {
-
-        ArrayList<Timeslot> timeslots = new ArrayList<>();
-        timeslots.add(new Timeslot(1,2,"2019-01-01","15:20:00","15:25:00"));
-
-        Assertions.assertEquals("15:20", service.parseTimeslotTimesToHHMM(timeslots).get(0).getStartTime());
-
-    }
+//    @Test
+//    void parseTime() throws ParseException {
+//
+//        Assertions.assertEquals("19:50", service.parseTimeToHHMM("19:50:51"));
+//    }
+//
+//
+//    @Test
+//    void parseTimesInTimeslotArray() throws ParseException {
+//
+//        ArrayList<Timeslot> timeslots = new ArrayList<>();
+//        timeslots.add(new Timeslot(1,2,"2019-01-01","15:20:00","15:25:00"));
+//
+//        Assertions.assertEquals("15:20", service.parseTimeslotTimesToHHMM(timeslots).get(0).getStartTime());
+//
+//    }
 
 
 
@@ -121,29 +117,53 @@ class BookitApplicationTests {
 
     }
 
+    @Test
+    void createBookingContent() {
 
-//    @Test
-//    void addContentToContent() {
-//
-//        // Testet är godkänt när antalet bookings har ökat med 1
-//
-//        int numberOfBookings = repo.numberOfBookings();
-//
-//        int newCustomerId = repo.addNewCustomer(new Customer(8805050375L, "Simon", "Stark", null, null));
-//        int newBookingRequestId = repo.addNewBookingRequestId(newCustomerId);
-//
-//        List<Content> contents = new ArrayList<>();
-//        contents.add(new Content(newBookingRequestId, SUBJECT.CAPITALSAVINGS, true));
-//        contents.add(new Content(newBookingRequestId, SUBJECT.CAPITALSAVINGS, false));
-//        contents.add(new Content(newBookingRequestId, SUBJECT.MORTAGES, true));
-//        contents.add(new Content(newBookingRequestId, SUBJECT.INSURANCE, false));
-//        contents.add(new Content(newBookingRequestId, SUBJECT.CHILDSAVINGS, true));
-//
-//        ContentHolder contentHolder = new ContentHolder(newBookingRequestId, contents, "Jag funkar!");
-//        repo.newContent(contentHolder);
-//
-//
-//    }
+        int newCustomerId = repo.addNewCustomer(new Customer(8805050375L, "Simon", "Stark", null, null));
+        int newBookingRequestId = repo.addNewBookingRequestId(newCustomerId);
+        repo.storeTextMessage(newBookingRequestId, "Jag vill prata ränta och sätta in kontanter");
+        int newTimeslotId = repo.newTimeslot(1, "2022-02-28", "13:35:00", "14:15:00");
+
+
+        BookingContent bookingContent = repo.getBookingContent(newTimeslotId,newBookingRequestId);
+
+        Assertions.assertEquals("2022-02-28", bookingContent.getDate());
+        Assertions.assertEquals("13:35", bookingContent.getStartTime());
+        Assertions.assertEquals("14:15", bookingContent.getEndTime());
+        Assertions.assertEquals("Jag vill prata ränta och sätta in kontanter", bookingContent.getTextMessage());
+        Assertions.assertEquals("Calle", bookingContent.getEmployeeFirstName());
+        Assertions.assertEquals("Edqvist", bookingContent.getEmployeeLastName());
+        Assertions.assertEquals("1.jpg", bookingContent.getPictureName());
+        Assertions.assertEquals("https://teams.microsoft.com/l/meetup-join/19%3ameeting_OTZjZjRkOTYtYzlhMi00MjI4LTkwNjUtYzQ5NzFkOGIxNDg", bookingContent.getVideoLink());
+
+
+    }
+
+
+
+    @Test
+    void addContentToContent() {
+
+        // Testet är godkänt när antalet bookings har ökat med 1
+
+        int numberOfBookings = repo.numberOfBookings();
+
+        int newCustomerId = repo.addNewCustomer(new Customer(8805050375L, "Simon", "Stark", null, null));
+        int newBookingRequestId = repo.addNewBookingRequestId(newCustomerId);
+
+        List<Content> contents = new ArrayList<>();
+        contents.add(new Content(newBookingRequestId, SUBJECT.CAPITALSAVINGS, true));
+        contents.add(new Content(newBookingRequestId, SUBJECT.CAPITALSAVINGS, false));
+        contents.add(new Content(newBookingRequestId, SUBJECT.MORTAGES, true));
+        contents.add(new Content(newBookingRequestId, SUBJECT.INSURANCE, false));
+        contents.add(new Content(newBookingRequestId, SUBJECT.CHILDSAVINGS, true));
+
+        ContentHolder contentHolder = new ContentHolder(newBookingRequestId, contents, "Jag funkar!");
+        repo.newContent(contentHolder);
+
+
+    }
 
 
 
@@ -167,7 +187,6 @@ class BookitApplicationTests {
 
 
         Assertions.assertEquals(num + 2, service.hideDuplicateTimeslots(repo.getEmptyTimeslotsOnDate("1918-01-28")).size());
-
 
     }
 

@@ -12,9 +12,6 @@ public class Repository {
     @Autowired
     private DataSource dataSource;
 
-    @Autowired
-    private BookitService service;
-
     public ArrayList<Timeslot> getEmptyTimeslots() {
 
         ArrayList<Timeslot> timeslots = new ArrayList<>();
@@ -167,21 +164,22 @@ public class Repository {
         }
 
     }
-    public void getCustomerInformation(int bookingrequestId, int timeslotId) {
 
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT WHERE ID =?")) {
-            ps.setInt(1, bookingrequestId);
-            ResultSet rs = ps.executeQuery();
-
-//            if (rs.next()) {
-//                return rsTimeslot(rs);
-//            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-//        return null;
-    }
+//    public void getCustomerInformation(int bookingrequestId, int timeslotId) {
+//
+//        try (Connection conn = dataSource.getConnection();
+//             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT WHERE ID =?")) {
+//            ps.setInt(1, bookingrequestId);
+//            ResultSet rs = ps.executeQuery();
+//
+////            if (rs.next()) {
+////                return rsTimeslot(rs);
+////            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+////        return null;
+//    }
 
     public int addNewCustomer(Customer customer) {
         int generatedId = -1;   // Kan inte skapa int = null
@@ -226,7 +224,7 @@ public class Repository {
         return generatedId;
     }
 
-    public BookingContent createBookingContent(int timeslotId, int bookingrequestId) {
+    public BookingContent getBookingContent(int timeslotId, int bookingrequestId) {
         Timeslot timeslot = getTimeslot(timeslotId);
 
         String date = timeslot.getDate();
@@ -241,9 +239,8 @@ public class Repository {
 
         return new BookingContent(date,startTime,endTime,null,textMessage,employeeFirstName,employeeLastName,picture,videoLink);
 
-
-
     }
+
     public String getAnyStringFromDatabase(String str) {  // Svarar med antalet lediga bookings
 
         // This method works with parameter eg. "SELECT COLUMNNAME FROM TABLENAME AS RESULT WHERE ID=X"
