@@ -54,14 +54,13 @@ public class BookItController {
         System.out.println(id);
 
         int bookingRequestId = (int) session.getAttribute("bookingRequestId");
-        int timeslotId = id;
 
         Timeslot timeslot = repository.getTimeslot(id);
         model.addAttribute("timeslot", timeslot);
 
-        repository.getBookingContent(timeslotId, bookingRequestId);
+        repository.getBookingContent(id, bookingRequestId);
 
-        model.addAttribute("BookingContent", repository.getBookingContent(timeslotId, bookingRequestId));
+        model.addAttribute("bookingContent", repository.getBookingContent(id, bookingRequestId));
 
 
         return "confirmation";

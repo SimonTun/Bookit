@@ -56,7 +56,7 @@ function moveDate(para) {
 function availableTimes (id){
 let bookingDate = year + "-" + (month+1) + "-" + id;
 console.log(bookingDate);
-window.location.href="http://localhost:8080/?date=" + bookingDate +"";
+window.location.href="http://localhost:8080/bookit/?date=" + bookingDate +"";
 
 }
 
