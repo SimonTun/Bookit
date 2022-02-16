@@ -59,9 +59,9 @@ public class BookItController {
         Timeslot timeslot = repository.getTimeslot(id);
         model.addAttribute("timeslot", timeslot);
 
-//        repository.getCustomerInformation(timeslotId, bookingRequestId);
+        repository.getBookingContent(timeslotId, bookingRequestId);
 
-//        model.addAttribute("customerConfirmInformation", information);
+        model.addAttribute("BookingContent", repository.getBookingContent(timeslotId, bookingRequestId));
 
 
         return "confirmation";
@@ -118,7 +118,7 @@ public class BookItController {
     @PostMapping("/bookIt")
     public String allSubject (@ModelAttribute ContentHolder contentHolder) {
 
-        repository.newContent(contentHolder);
+//        repository.newContent(contentHolder);
 
 
 
