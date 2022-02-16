@@ -1,5 +1,6 @@
 package com.bookit.demo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookingContent {
@@ -8,14 +9,14 @@ public class BookingContent {
     private String date;
     private String startTime;
     private String endTime;
-    private List<Content> contents;
+    private List<String> contents = new ArrayList<>();
     private String textMessage;
     private String employeeFirstName;
     private String employeeLastName;
     private String pictureName;         // 1.jpg for employeeID = 1
     private String videoLink;
 
-    public BookingContent(String date, String startTime, String endTime, List<Content> contents, String textMessage, String employeeFirstName, String employeeLastName, String pictureName, String videoLink) {
+    public BookingContent(String date, String startTime, String endTime, List<String> contents, String textMessage, String employeeFirstName, String employeeLastName, String pictureName, String videoLink) {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -52,11 +53,11 @@ public class BookingContent {
         this.endTime = endTime;
     }
 
-    public List<Content> getContents() {
+    public List<String> getContents() {
         return contents;
     }
 
-    public void setContents(List<Content> contents) {
+    public void setContents(List<String> contents) {
         this.contents = contents;
     }
 
