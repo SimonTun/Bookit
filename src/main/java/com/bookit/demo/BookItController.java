@@ -69,7 +69,7 @@ public class BookItController {
 
 
 
-        @GetMapping("/start")
+        @GetMapping("/")
     public String bookItStart() {
 
         return "startPage";
