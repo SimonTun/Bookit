@@ -12,6 +12,9 @@ public class Repository {
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    private BookitService service;
+
     public ArrayList<Timeslot> getEmptyTimeslots() {
 
         ArrayList<Timeslot> timeslots = new ArrayList<>();
@@ -180,8 +183,6 @@ public class Repository {
 //        return null;
     }
 
-
-
     public int addNewCustomer(Customer customer) {
         int generatedId = -1;   // Kan inte skapa int = null
 
@@ -225,8 +226,48 @@ public class Repository {
         return generatedId;
     }
 
+    public BookingContent createBookingContent(int timeslotId, int bookingrequestId) {
+        Timeslot timeslot = getTimeslot(timeslotId);
+
+        String date = timeslot.getDate();
+        String startTime = timeslot.getStartTime().substring(0,5);
+        String endTime = timeslot.getEndTime().substring(0,5);
+        int employeeId = timeslot.getEmployeeId();
+        String textMessage = getAnyStringFromDatabase("SELECT TEXTMESSAGE AS RESULT FROM BOOKINGREQUEST WHERE ID="+bookingrequestId +"");
+        String employeeFirstName = getAnyStringFromDatabase("SELECT FIRSTNAME AS RESULT FROM EMPLOYEE WHERE ID="+employeeId +"");
+        String employeeLastName = getAnyStringFromDatabase("SELECT LASTNAME  AS RESULT FROM EMPLOYEE WHERE ID="+employeeId +"");
+        String picture = employeeId+".jpg";
+        String videoLink = "https://teams.microsoft.com/l/meetup-join/19%3ameeting_OTZjZjRkOTYtYzlhMi00MjI4LTkwNjUtYzQ5NzFkOGIxNDg";
+
+        return new BookingContent(date,startTime,endTime,null,textMessage,employeeFirstName,employeeLastName,picture,videoLink);
+
+
+
+    }
+    public String getAnyStringFromDatabase(String str) {  // Svarar med antalet lediga bookings
+
+        // This method works with parameter eg. "SELECT COLUMNNAME FROM TABLENAME AS RESULT WHERE ID=X"
+
+        String result ="";
+
+        try (Connection conn = dataSource.getConnection();
+             Statement statement = conn.createStatement();
+             ResultSet rs = statement.executeQuery(str)) {
+
+            if (rs.next()) {
+                result = rs.getString("RESULT");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
 
     //Metoden nedan behövs egentligen inte. Metodens svar går att få från getEmptyTimeslots().size
+
+
 
     public int numberOfEmptyTimeslots() {  // Svarar med antalet lediga bookings
 
