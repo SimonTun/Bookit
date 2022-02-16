@@ -8,8 +8,8 @@
 <body>
 <h1>Handelsbanken</h1>
 <h3> Vad vill du ha rådgivning om?</h3>
-<form action="/bookIt" method="post" th:object="${bookingRequest}">
-       Kund <input type="text" th:field="*{customerId}">
+<form action="/bookIt" method="post" th:object="${contentHolder}">
+       Kund <input type="text" th:field="*{bookingRequestId}">
 
     <div>
         <div th:each="content, itemStat : *{contents}">
