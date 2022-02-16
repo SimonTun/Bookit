@@ -5,6 +5,56 @@
 h1{
   font-family: Helvetica, Arial, sans-serif;
   color: #1b9dc3;
+
+}
+
+body {
+background-color: #f7f7f7;
+
+}
+
+h3 {
+
+    font-family: Helvetica, Arial, sans-serif;
+    text-align: center;
+
+}
+
+.line {
+
+   border-bottom: #1b9dc3;
+  border-bottom-style: double;
+
+}
+
+.progressbar{
+
+margin: auto;
+text-align: center;
+
+}
+
+.progressbar p {
+
+    align-items: center;
+    margin: 27px;
+    display: inline-block;
+    padding: 12px 40px;
+    border: 2px solid #87b0c2;
+    color: #005fa5;
+    border-radius: 4px;
+    line-height: 18px;
+    background-color: transparent;
+    font-size: 16px;
+    font-family: Helvetica, Arial, sans-serif;
+    cursor: pointer;
+
+}
+
+.show {
+
+ backdrop-filter: contrast(0.5);
+
 }
 
 ul {list-style-type: none;}
@@ -78,9 +128,50 @@ font-size: 24px;
 color: #222;
 }
 
+.customerForm {
+
+    font-family: Helvetica, Arial, sans-serif;
+    position: inherit;
+    margin-left: 40%;
+    margin-top: 69px;
+    margin-top: 416px margin-left: 192px;
+    display: inline-block;
+    pad: ;
+    border: 2px solid #87b0c2;
+    color: black;
+    padding: 36px;
+    border-radius: 4px;
+    margin-bottom: 100%;
+    line-height: 18px;
+    background-color: #ffffffcc;
+    font-size: 16px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.buttonForm {
+
+    background-color: #005fa5c2;
+    border: 1px solid #005fa5c2;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 8px 9px;
+    margin-left: 10px;
+    border-radius: 8px;
+
+}
+
+.buttonForm:hover{
+
+cursor: pointer;
+background-color: #005fa5fa;
+text-decoration: underline;
+
+}
+
 .privateOrBusiness {
-  font-family: Helvetica, Arial, sans-serif;
-  text-align: center;
+    text-align: center;
+    font-size: 17px;
+    color: black;
 
 }
 
@@ -96,9 +187,9 @@ color: #222;
 /* Calender */
 
 .wrapper {
-    background-color: #dfe6e9;
+
     width: 100vw;
-    height: 56vh;
+    height: 46vh;
     display: flex;
     }
     .calendar {
@@ -185,6 +276,7 @@ color: #222;
 
 
 .slots {
+  border-radius: 20px;
   padding: 10px 0;
   background: #FFFFFF;
   margin: auto;
