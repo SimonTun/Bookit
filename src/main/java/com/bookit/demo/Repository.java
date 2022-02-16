@@ -170,12 +170,11 @@ public class Repository {
         int generatedId = -1;   // Kan inte skapa int = null
 
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("INSERT INTO CUSTOMER (SocialSecurityNumber, FirstName, LastName, Email, PhoneNumber) VALUES (?,?,?,?,?) ", Statement.RETURN_GENERATED_KEYS)) {
-            ps.setLong(1, customer.getCustomerNumber());
-            ps.setString(2, customer.getFirstName());
-            ps.setString(3, customer.getLastName());
-            ps.setString(4, customer.getEmail());
-            ps.setString(5, customer.getPhoneNumber());
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO CUSTOMER (FirstName, LastName, Email, PhoneNumber) VALUES (?,?,?,?) ", Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, customer.getFirstName());
+            ps.setString(2, customer.getLastName());
+            ps.setString(3, customer.getEmail());
+            ps.setString(4, customer.getPhoneNumber());
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();  // Hämta av databasen genererat ID för den tillagda raden
@@ -311,7 +310,6 @@ public class Repository {
 
     private Customer rsCustomer(ResultSet rs) throws SQLException {
         return new Customer(rs.getInt("Id"),
-                rs.getLong("SocialSecurityNumber"),
                 rs.getString("FirstName"),
                 rs.getString("LastName"),
                 rs.getString("PhoneNumber"),
