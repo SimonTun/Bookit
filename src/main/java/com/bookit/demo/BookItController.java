@@ -117,7 +117,7 @@ public class BookItController {
     @PostMapping("/bookIt")
     public String allSubject (@ModelAttribute ContentHolder contentHolder) {
 
-//        repository.newContent(contentHolder);
+        repository.newContent(contentHolder);
 
 
 
