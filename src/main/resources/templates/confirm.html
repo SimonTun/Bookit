@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/style.css" th:href="'/style.css'">
+    <script src="../static/javaScript.js" th:src="'/javaScript.js'"></script>
+    <title>Din lokala bank</title>
+</head>
+
+<body>
+
+<div>
+    <h1> Handelsbanken </h1>
+</div>
+<div class="line">
+
+</div>
+
+<div class="progressbar">
+    <p >
+        Dina uppgifter
+    </p>
+
+    <p>
+        Agenda
+    </p>
+
+    <p>
+        Datum och tid
+    </p>
+
+    <p class="show">
+        Bekräftelse
+    </p>
+
+</div>
+
+
+<p class="content">
+
+<div class= "privateOrBusiness">
+    <h3> Bekräfta din bokning</h3>
+    <p>
+        Nu är du strax klar med din bokning. Vänligen kontrollera uppgifterna innan du bekräftar
+
+    </p>
+</div>
+
+
+
+<div class="customerForm">
+
+    <h3>Mötesdetaljer</h3>
+
+    <p> Datum: </p>
+
+    <div th:text=" ${bookingContent.date}"> </div>
+
+    <p> Tid: </p>
+
+    <div th:text= "${bookingContent.startTime}"></div>
+    <div th:text="${bookingContent.endTime}"> </div>
+
+    <p>Agenda:</p>
+
+    <div th:each="content : ${bookingContent.contents}" th:text="${content}"></div>
+
+
+
+    <p> Övrig information: </p>
+
+    <div th:text=" ${bookingContent.textMessage}"> </div>
+
+
+    <p> Rådgivare: </p>
+
+    <div class="image">
+        <div>
+            <img src="../static/lwam.jpg" th:src="'/lwam.jpg'">
+        </div>
+    </div>
+    <div th:text="${bookingContent.employeeFirstName}"></div>
+    <div th:text="${bookingContent.employeeLastName}"></div>
+
+</div>
+
+<!--    Länk till mötet: </br>-->
+<!--    <a  th:text="${bookingContent.videoLink}" th:href="${bookingContent.videoLink}"></a>-->
+
+
+</body>
+</html>
+

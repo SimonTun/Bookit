@@ -10,14 +10,52 @@
 <div>
     <h1> Handelsbanken </h1>
 </div>
+</div>
+<div class="line">
 
-<div class="privateOrBusiness">
-    <h3> Ditt möte är nu bokat!</h3>
-    <p> Välkommen (datum) på möte med (rådgivare) </p>
+    <div>
+
+
+
+    <h1 th:text="${bookingContent.date}"></h1>
+    <h1 th:text="${bookingContent.startTime}"></h1>
+
+
+    </div>
 
 </div>
 
+<div class="progressbar">
+    <p>
+        Dina uppgifter
+    </p>
 
+    <p>
+        Agenda
+    </p>
+
+    <p>
+        Datum och tid
+    </p>
+
+    <p class="show">
+        Bekräftelse
+    </p>
+
+</div>
+
+</div>
+<div class="privateOrBusiness">
+    <h3> Ditt möte är nu bokat!</h3>
+    <p> Välkommen (datum) på möte med (rådgivare) </p>
+    <div>
+        <h1 th:text="${bookingContent.date}"></h1>
+        <h1 th:text="${bookingContent.startTime}"></h1>
+    </div>
+</div>
+
+<!--Länk till mötet: </br>-->
+<!--<a  th:text="${bookingContent.videoLink}" th:href="${bookingContent.videoLink}"></a>-->
 
 </body>
 </html>

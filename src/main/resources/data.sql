@@ -1,8 +1,8 @@
-INSERT INTO CUSTOMER (SocialSecurityNumber, FirstName, LastName, Email, PhoneNumber)
-VALUES(9001112500, 'Ulf', 'Line','ulf@hotmail.com', '08-54398723'),
-(8801128752, 'Sandra', 'Eriksson','Sandra@hotmail.com', '08-54357466'),
-(6601112500, 'Hanna', 'Larsson','Eriksson@gmail.com', '070-5556842'),
-(9001112500, 'Gustav', 'Pettersson','Petterson@gmail.com', '08-54395543');
+INSERT INTO CUSTOMER (FirstName, LastName, Email, PhoneNumber)
+VALUES('Ulf', 'Line','ulf@hotmail.com', '08-54398723'),
+('Sandra', 'Eriksson','Sandra@hotmail.com', '08-54357466'),
+('Hanna', 'Larsson','Eriksson@gmail.com', '070-5556842'),
+('Gustav', 'Pettersson','Petterson@gmail.com', '08-54395543');
 
 
 INSERT INTO Employee (UserName, FirstName, LastName, Email, PhoneNumber)
@@ -40,30 +40,22 @@ VALUES
 (2, '2018-03-10', '15:15', '16:00'),
 (2, '2018-08-10', '15:15', '16:00');
 
-INSERT INTO Booking (CustomerId, TimeslotId,textmessage)
-VALUES (1, 2,'jag vill se över min ränta'),
-(2, 3,null),
-(3, 4, 'Vill ha hjälp med BankID'),
-(4, 1,null);
 
 
-INSERT INTO Subject (Subject)
- VALUES ('PensionSavings'),
- ('CapitalSavings'),
-  ('Mortgages'),
-   ('Insurance'),
-    ('ChildSavings');
+INSERT INTO BOOKINGREQUEST (CustomerId, Textmessage)
+VALUES (1, 'Här är mitt lösenord: test123'),
+(2, 'Jag har fått ett arv från en nigeriansk prins');
 
-    INSERT INTO BOOKINGREQUEST (CustomerId)
-       VALUES (1),
-      (2);
 
-    INSERT INTO Content(BookingrequestID,SUBJECTSID)
-     VALUES (1,5),
-     (1,3),
-      (2,4),
-       (2,1),
-        (2,1);
+INSERT INTO Content(BookingrequestID, CONTENT)
+VALUES (1,'PENSIONSAVINGS'),
+(1,'CAPITALSAVINGS'),
+(2,'CAPITALSAVINGS');
+
+
+INSERT INTO Booking (BOOKINGREQUESTID, TimeslotId)
+VALUES (1, 2),
+(2, 3);
 
 
 --INSERT INTO Content (Subjects)
