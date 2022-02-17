@@ -26,7 +26,6 @@ public class BookingContent {
         this.videoLink = videoLink;
     }
 
-
     public String getDate() {
         return date;
     }

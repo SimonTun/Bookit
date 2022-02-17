@@ -24,6 +24,10 @@ public class BookitRestController {
         return repo.getEmptyTimeslots();
     }
 
+    @GetMapping("/employeeTimeslots/{id}")
+    public ArrayList<Timeslot> employeeTimeslots(@PathVariable int id) {
+        return repo.getEmployeesBookings(id);
+    }
 
 
 }

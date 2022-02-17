@@ -47,3 +47,4 @@ function availableTimes (id){
     console.log(bookingDate);
     window.location.href="http://localhost:8080/bookIt/?date=" + bookingDate +"";
 }
+

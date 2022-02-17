@@ -25,6 +25,7 @@ public class Repository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return timeslots;
     }
 
@@ -122,35 +123,52 @@ public class Repository {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-            }
-        }
-    }
 
+            }
+
+
+        }
+
+    }
     public void storeTextMessage(int bookingrequestId, String textmessage) {
+
+//        UPDATE Customers
+//        SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
+//        WHERE CustomerID = 1;
+//
+
+
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("UPDATE BOOKINGREQUEST SET TEXTMESSAGE = ? WHERE ID = ? ")) {
             ps.setString(1, textmessage);
             ps.setInt(2, bookingrequestId);
 
             ps.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
 
+    }
     public void getCustomerInformation(int bookingrequestId, int timeslotId) {
+
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT WHERE ID =?")) {
             ps.setInt(1, bookingrequestId);
-
             ResultSet rs = ps.executeQuery();
+
+//            if (rs.next()) {
+//                return rsTimeslot(rs);
+//            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+//        return null;
     }
 
     public int addNewCustomer(Customer customer) {
         int generatedId = -1;   // Kan inte skapa int = null
+
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO CUSTOMER (FirstName, LastName, Email, PhoneNumber) VALUES (?,?,?,?) ", Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, customer.getFirstName());
@@ -163,6 +181,7 @@ public class Repository {
             if (rs.next()) {
                 generatedId = rs.getInt(1);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -171,15 +190,18 @@ public class Repository {
 
     public int addNewBookingRequestId(int customerId) {
         int generatedId = -1;   // Kan inte skapa int = null
+
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO BOOKINGREQUEST (CustomerId) VALUES (?) ", Statement.RETURN_GENERATED_KEYS)) {
             ps.setLong(1, customerId);
 
             ps.executeUpdate();
+
             ResultSet rs = ps.getGeneratedKeys();  // Hämta av databasen genererat ID för den tillagda raden
             if (rs.next()) {
                 generatedId = rs.getInt(1);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -188,12 +210,13 @@ public class Repository {
 
     public BookingContent createBookingContent(int timeslotId, int bookingrequestId) {
         Timeslot timeslot = getTimeslot(timeslotId);
-        List<String> contents = new ArrayList<>();
+
+         List<String> contents = new ArrayList<>();
+
         String date = timeslot.getDate();
         String startTime = timeslot.getStartTime().substring(0,5);
         String endTime = timeslot.getEndTime().substring(0,5);
         int employeeId = timeslot.getEmployeeId();
-
         String textMessage = getAnyStringFromDatabase("SELECT TEXTMESSAGE AS RESULT FROM BOOKINGREQUEST WHERE ID="+bookingrequestId +"");
         String employeeFirstName = getAnyStringFromDatabase("SELECT FIRSTNAME AS RESULT FROM EMPLOYEE WHERE ID="+employeeId +"");
         String employeeLastName = getAnyStringFromDatabase("SELECT LASTNAME  AS RESULT FROM EMPLOYEE WHERE ID="+employeeId +"");
@@ -312,4 +335,23 @@ public class Repository {
                 rs.getString("Email"));
 
     }
+
+    public ArrayList<Timeslot> getEmployeesBookings(int id) {
+
+        ArrayList<Timeslot> employeesTimeslots = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT WHERE EMPLOYEEID =? ")) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                employeesTimeslots.add(rsTimeslot(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employeesTimeslots;
+    }
+
+
 }

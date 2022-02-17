@@ -17,7 +17,6 @@ public class BookItController {
 
     @Autowired
     Repository repository;
-
     @Autowired
     BookitService service;
 

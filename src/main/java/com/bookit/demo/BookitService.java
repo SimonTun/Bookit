@@ -88,9 +88,11 @@ public class BookitService {
             parsedTime.setEndTime(parseTimeToHHMM(oldEndTime));       }
 
         return parsedTimes;
+
     }
 
     public ArrayList<Timeslot> hideDuplicateTimeslots(ArrayList<Timeslot> timeslots) {
+
         ArrayList<Timeslot> noDuplicates = new ArrayList<>();
 
         if (timeslots.size()==0) return noDuplicates;
@@ -113,4 +115,5 @@ public class BookitService {
         }
         return noDuplicates;
     }
+
 }

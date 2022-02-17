@@ -8,11 +8,9 @@ public enum SUBJECT {
     CHILDSAVINGS ("Barnsparande");
 
   private final String displayValue;
-
    private SUBJECT (String displayValue) {
       this.displayValue = displayValue;
    }
-
    public String getDisplayValue() {
        return displayValue;
    }
