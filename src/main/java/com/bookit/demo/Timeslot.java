@@ -8,7 +8,6 @@ public class Timeslot {
     private String startTime;
     private String endTime;
 
-
     public Timeslot(int id, int employeeId, String date, String startTime, String endTime) {
         this.id = id;
         this.employeeId = employeeId;
@@ -18,7 +17,6 @@ public class Timeslot {
     }
 
     public Timeslot(int employeeId, String date, String startTime, String endTime) {
-
         this.employeeId = employeeId;
         this.date = date;
         this.startTime = startTime;
@@ -26,7 +24,6 @@ public class Timeslot {
     }
 
     public Timeslot() {
-
     }
 
     public int getId() {

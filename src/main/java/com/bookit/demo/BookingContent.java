@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookingContent {
-
-
     private String date;
     private String startTime;
     private String endTime;

@@ -1,8 +1,6 @@
 package com.bookit.demo;
 
 public enum SUBJECT {
-
-
     PENSIONSAVINGS ("Pensionsparande"),
     CAPITALSAVINGS ("Kapitalplacering"),
     MORTAGES ("Bolån"),

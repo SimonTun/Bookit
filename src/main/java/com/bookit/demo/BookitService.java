@@ -2,9 +2,6 @@ package com.bookit.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -12,7 +9,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
@@ -20,16 +16,13 @@ public class BookitService {
     @Autowired
     Repository repo;
 
-
     public String getTodaysDate() {
-
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return (date.format(formatter));
     }
 
     public ArrayList<Timeslot> prepareTimeslotArrayForPresentationOnWeb(String date) throws ParseException {
-
         // First - get ArrayList on correct day
         ArrayList<Timeslot> preparedList = repo.getEmptyTimeslotsOnDate(date);
 
@@ -37,16 +30,12 @@ public class BookitService {
         preparedList = hideDuplicateTimeslots(preparedList);
 
         // Third - Parse time from HH:MM:SS to HH:MM
-
         preparedList = parseTimeslotTimesToHHMM(preparedList);
 
         return preparedList;
-
-
     }
 
     public void generateTimeslots(int numOfDaysFromToday) throws ParseException {
-
         int num = 0;
         int employee = 0;
         LocalDate today = LocalDate.now();
@@ -73,28 +62,20 @@ public class BookitService {
             }
         }
         System.out.println(num + " timeslots generated!");
-
     }
 
     public String parseTimeToHHMM(String time) throws ParseException {
-
-
         SimpleDateFormat df = new SimpleDateFormat("HH:mm");
         Date d = df.parse(time);
         Calendar cal = Calendar.getInstance();
         cal.setTime(d);
 //        cal.add(Calendar.MINUTE, 10);
         return df.format(cal.getTime());
-
     }
 
     public ArrayList<Timeslot> parseTimeslotTimesToHHMM(ArrayList<Timeslot> timeslots) throws ParseException {
-
         ArrayList<Timeslot> parsedTimes;
-
         parsedTimes = (ArrayList)timeslots.clone();
-
-
         String oldStartTime;
         String oldEndTime;
 
@@ -106,14 +87,12 @@ public class BookitService {
             oldEndTime = parsedTime.getEndTime();
             parsedTime.setEndTime(parseTimeToHHMM(oldEndTime));       }
 
-
         return parsedTimes;
-
     }
 
     public ArrayList<Timeslot> hideDuplicateTimeslots(ArrayList<Timeslot> timeslots) {
-
         ArrayList<Timeslot> noDuplicates = new ArrayList<>();
+
         if (timeslots.size()==0) return noDuplicates;
 
         boolean isDuplicate;
@@ -134,8 +113,4 @@ public class BookitService {
         }
         return noDuplicates;
     }
-
-
-
-
 }
