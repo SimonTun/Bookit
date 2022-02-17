@@ -119,13 +119,13 @@ class BookitApplicationTests {
     @Test
     void createBookingContent() {
 
-        int newCustomerId = repo.addNewCustomer(new Customer(8805050375L, "Simon", "Stark", null, null));
+        int newCustomerId = repo.addNewCustomer(new Customer( "Simon", "Stark", null, null));
         int newBookingRequestId = repo.addNewBookingRequestId(newCustomerId);
         repo.storeTextMessage(newBookingRequestId, "Jag vill prata ränta och sätta in kontanter");
         int newTimeslotId = repo.newTimeslot(1, "2022-02-28", "13:35:00", "14:15:00");
 
 
-        BookingContent bookingContent = repo.getBookingContent(newTimeslotId,newBookingRequestId);
+        BookingContent bookingContent = repo.createBookingContent(newTimeslotId,newBookingRequestId);
 
         Assertions.assertEquals("2022-02-28", bookingContent.getDate());
         Assertions.assertEquals("13:35", bookingContent.getStartTime());
@@ -148,7 +148,7 @@ class BookitApplicationTests {
 
         int numberOfBookings = repo.numberOfBookings();
 
-        int newCustomerId = repo.addNewCustomer(new Customer(8805050375L, "Simon", "Stark", null, null));
+        int newCustomerId = repo.addNewCustomer(new Customer( "Simon", "Stark", null, null));
         int newBookingRequestId = repo.addNewBookingRequestId(newCustomerId);
 
         List<Content> contents = new ArrayList<>();
