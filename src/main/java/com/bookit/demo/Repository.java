@@ -234,11 +234,13 @@ public class Repository {
         String startTime = timeslot.getStartTime().substring(0,5);
         String endTime = timeslot.getEndTime().substring(0,5);
         int employeeId = timeslot.getEmployeeId();
+        String picture = Integer.toString(timeslot.getEmployeeId());
         String textMessage = getAnyStringFromDatabase("SELECT TEXTMESSAGE AS RESULT FROM BOOKINGREQUEST WHERE ID="+bookingrequestId +"");
         String employeeFirstName = getAnyStringFromDatabase("SELECT FIRSTNAME AS RESULT FROM EMPLOYEE WHERE ID="+employeeId +"");
         String employeeLastName = getAnyStringFromDatabase("SELECT LASTNAME  AS RESULT FROM EMPLOYEE WHERE ID="+employeeId +"");
-        String picture = employeeId+".jpg";
         String videoLink = "https://teams.microsoft.com/l/meetup-join/19%3ameeting_OTZjZjRkOTYtYzlhMi00MjI4LTkwNjUtYzQ5NzFkOGIxNDg";
+
+        System.out.println(picture);
 
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT CONTENT AS RESULT FROM CONTENT WHERE BOOKINGREQUESTID =?")) {
@@ -259,8 +261,9 @@ public class Repository {
     public Customer email(int customerId) {
 
         String email = getAnyStringFromDatabase("SELECT EMAIL AS RESULT FROM CUSTOMER WHERE ID="+ customerId +"");
+        String firstName = getAnyStringFromDatabase("SELECT FIRSTNAME AS RESULT FROM CUSTOMER WHERE ID="+ customerId +"");
 
-        return new Customer(email);
+        return new Customer(email,firstName);
 
 
     }

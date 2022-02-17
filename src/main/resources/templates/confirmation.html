@@ -51,15 +51,31 @@
 </div>
 <div class="privateOrBusiness">
     <h3> Ditt möte är nu bokat!</h3>
-    <p> Välkommen (datum) på möte med (rådgivare) </p>
+</div>
+<div class="customerForm">
+    <p> Mötet äger rum:</p>
     <div>
         <h1 th:text="${bookingContent.date}"></h1>
         <h1 th:text="${bookingContent.startTime}"></h1>
     </div>
-</div>
+
+
+
+
+       <div th:text=" ' Tack för din bokning ' + ${customer.firstName} + '!'"> </div>
+    <p></p>
 Ett bekräftelsemejl har skickats till: <p th:text="${customer.email}"> </p>
 Länk till mötet: </br>
+        <div class ="meetingLink">
 <a  th:text="${bookingContent.videoLink}" th:href="${bookingContent.videoLink}"></a>
+            </div>
+    <p></p>
+        <a href="/">
+            <button class="buttonForm"> Tillbaka till startsidan </button>
+        </a>
+
+
+    </div>
 
 </body>
 </html>

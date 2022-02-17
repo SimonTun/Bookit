@@ -24,8 +24,9 @@ public class Customer {
     public Customer(){
 
     }
-    public Customer(String email){
+    public Customer(String email,String firstName){
     this.email=email;
+    this.firstName=firstName;
     }
 
     public int getId() {
