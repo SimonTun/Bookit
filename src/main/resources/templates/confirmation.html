@@ -17,8 +17,8 @@
 
 
 
-    <h1 th:text="${bookingContent.date}"></h1>
-    <h1 th:text="${bookingContent.startTime}"></h1>
+<!--    <h1 th:text="${bookingContent.date}"></h1>-->
+<!--    <h1 th:text="${bookingContent.startTime}"></h1>-->
 
 
     </div>
@@ -57,9 +57,9 @@
         <h1 th:text="${bookingContent.startTime}"></h1>
     </div>
 </div>
-
-<!--Länk till mötet: </br>-->
-<!--<a  th:text="${bookingContent.videoLink}" th:href="${bookingContent.videoLink}"></a>-->
+Ett bekräftelsemejl har skickats till: <p th:text="${customer.email}"> </p>
+Länk till mötet: </br>
+<a  th:text="${bookingContent.videoLink}" th:href="${bookingContent.videoLink}"></a>
 
 </body>
 </html>

@@ -90,16 +90,20 @@
     </div>
     <div th:text="${bookingContent.employeeFirstName}" ></div>
     <div th:text="${bookingContent.employeeLastName}"></div>
+    <a href="/confirmation">
+        <button>Bekräfta </button>
+    </a>
+    <a href="/">
+        <button>Tillbaka till startsidan </button>
+    </a>
 
     <p></p>
 
-    <div class="nextButton">
-        <input class="buttonForm" value="Boka möte!" type="submit"/>
+<!--    <div class="nextButton">-->
+<!--        <input class="buttonForm" value="Boka möte!" type="submit"/>-->
 
 </div>
 
-<!--    Länk till mötet: </br>-->
-<!--    <a  th:text="${bookingContent.videoLink}" th:href="${bookingContent.videoLink}"></a>-->
 
 
 </body>
