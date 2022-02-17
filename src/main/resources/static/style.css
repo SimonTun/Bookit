@@ -260,6 +260,9 @@ text-decoration: underline;
     background-color: #22a7f4;
     color: #fff;
     }
+    .clicked {
+      background-color: #dfe6e9
+    }
     .days div:hover {
     cursor: pointer;
     background-color: #dfe6e9
