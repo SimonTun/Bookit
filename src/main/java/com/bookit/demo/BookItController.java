@@ -62,12 +62,24 @@ public class BookItController {
         BookingContent bookingContent=repository.createBookingContent(timeslotId,bookingRequestId);
 
         model.addAttribute("bookingContent", bookingContent);
-
+        session.setAttribute("bookingContent",bookingContent);
 
         return "confirm";
     }
 
+    @GetMapping("/confirmation")
+    public String confirmation(Model model, HttpSession session) throws ParseException {
 
+
+        int customerId=(int)session.getAttribute("customerId");
+        BookingContent bookingContent= (BookingContent) session.getAttribute("bookingContent");
+
+        Customer customer =repository.email(customerId);
+        model.addAttribute("customer", customer);
+        model.addAttribute("bookingContent", bookingContent);
+        System.out.println(customer);
+        return "confirmation";
+    }
 
 
         @GetMapping("/")

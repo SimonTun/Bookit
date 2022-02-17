@@ -252,11 +252,19 @@ public class Repository {
             e.printStackTrace();
         }
 
-
         return new BookingContent(date,startTime,endTime,contents,textMessage,employeeFirstName,employeeLastName,picture,videoLink);
 
 
     }
+    public Customer email(int customerId) {
+
+        String email = getAnyStringFromDatabase("SELECT EMAIL AS RESULT FROM CUSTOMER WHERE ID="+ customerId +"");
+
+        return new Customer(email);
+
+
+    }
+
     public String getAnyStringFromDatabase(String str) {  // Svarar med antalet lediga bookings
 
         // This method works with parameter eg. "SELECT COLUMNNAME FROM TABLENAME AS RESULT WHERE ID=X"

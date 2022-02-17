@@ -84,13 +84,18 @@
             <img src="../static/lwam.jpg" th:src="'/lwam.jpg'">
         </div>
     </div>
+    </br>
     <div th:text="${bookingContent.employeeFirstName}"></div>
     <div th:text="${bookingContent.employeeLastName}"></div>
+    <a href="/confirmation">
+        <button>Bekräfta </button>
+    </a>
+    <a href="/">
+        <button>Tillbaka till startsidan </button>
+    </a>
 
 </div>
 
-<!--    Länk till mötet: </br>-->
-<!--    <a  th:text="${bookingContent.videoLink}" th:href="${bookingContent.videoLink}"></a>-->
 
 
 </body>
