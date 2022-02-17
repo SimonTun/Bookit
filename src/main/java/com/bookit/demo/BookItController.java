@@ -28,7 +28,7 @@ public class BookItController {
         return "redirect:/";
     }
 
-    @GetMapping("/bookit")
+    @GetMapping("/bookIt")
     public String bookIt(Model model, HttpSession session, @RequestParam(required = false) String date) throws ParseException {
 
         ArrayList<Timeslot> timeslots;
@@ -54,16 +54,17 @@ public class BookItController {
         System.out.println(id);
 
         int bookingRequestId = (int) session.getAttribute("bookingRequestId");
+        int timeslotId = id;
 
         Timeslot timeslot = repository.getTimeslot(id);
         model.addAttribute("timeslot", timeslot);
 
-        repository.getBookingContent(id, bookingRequestId);
+        BookingContent bookingContent=repository.createBookingContent(timeslotId,bookingRequestId);
 
-        model.addAttribute("bookingContent", repository.getBookingContent(id, bookingRequestId));
+        model.addAttribute("bookingContent", bookingContent);
 
 
-        return "confirmation";
+        return "confirm";
     }
 
 

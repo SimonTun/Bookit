@@ -5,12 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @org.springframework.stereotype.Repository
 public class Repository {
 
     @Autowired
     private DataSource dataSource;
+
+
 
     public ArrayList<Timeslot> getEmptyTimeslots() {
 
@@ -124,8 +127,7 @@ public class Repository {
 
         for (int i = 0; i < content.getContents().size(); i++) {
             if (content.getContents().get(i).isEnabled()) {
-//                value = content.getContents().get(i).getSubjects().name();
-                value = content.getContents().get(i).getSubjects().name();
+                value = content.getContents().get(i).getSubjects().getDisplayValue();
 
                 try (Connection conn = dataSource.getConnection();
                      PreparedStatement ps = conn.prepareStatement("INSERT INTO CONTENT (BookingRequestId, content) VALUES (?,?) ")) {
@@ -165,22 +167,21 @@ public class Repository {
         }
 
     }
+    public void getCustomerInformation(int bookingrequestId, int timeslotId) {
 
-//    public void getCustomerInformation(int bookingrequestId, int timeslotId) {
-//
-//        try (Connection conn = dataSource.getConnection();
-//             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT WHERE ID =?")) {
-//            ps.setInt(1, bookingrequestId);
-//            ResultSet rs = ps.executeQuery();
-//
-////            if (rs.next()) {
-////                return rsTimeslot(rs);
-////            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-////        return null;
-//    }
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT WHERE ID =?")) {
+            ps.setInt(1, bookingrequestId);
+            ResultSet rs = ps.executeQuery();
+
+//            if (rs.next()) {
+//                return rsTimeslot(rs);
+//            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+//        return null;
+    }
 
     public int addNewCustomer(Customer customer) {
         int generatedId = -1;   // Kan inte skapa int = null
@@ -224,8 +225,10 @@ public class Repository {
         return generatedId;
     }
 
-    public BookingContent getBookingContent(int timeslotId, int bookingrequestId) {
+    public BookingContent createBookingContent(int timeslotId, int bookingrequestId) {
         Timeslot timeslot = getTimeslot(timeslotId);
+
+         List<String> contents = new ArrayList<>();
 
         String date = timeslot.getDate();
         String startTime = timeslot.getStartTime().substring(0,5);
@@ -237,10 +240,23 @@ public class Repository {
         String picture = employeeId+".jpg";
         String videoLink = "https://teams.microsoft.com/l/meetup-join/19%3ameeting_OTZjZjRkOTYtYzlhMi00MjI4LTkwNjUtYzQ5NzFkOGIxNDg";
 
-        return new BookingContent(date,startTime,endTime,null,textMessage,employeeFirstName,employeeLastName,picture,videoLink);
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT CONTENT AS RESULT FROM CONTENT WHERE BOOKINGREQUESTID =?")) {
+            ps.setInt(1, bookingrequestId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+        contents.add(rs.getString("RESULT"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return new BookingContent(date,startTime,endTime,contents,textMessage,employeeFirstName,employeeLastName,picture,videoLink);
+
 
     }
-
     public String getAnyStringFromDatabase(String str) {  // Svarar med antalet lediga bookings
 
         // This method works with parameter eg. "SELECT COLUMNNAME FROM TABLENAME AS RESULT WHERE ID=X"
@@ -350,10 +366,6 @@ public class Repository {
 //    }
 
     //
-//    private Content rsContent(ResultSet rs) throws SQLException {
-//        return new Content(rs.getInt("id"),
-//                rs.getString("subjects"));
-//    }
 
     private Timeslot rsTimeslot(ResultSet rs) throws SQLException {
         return new Timeslot(rs.getInt("Id"),
@@ -362,6 +374,7 @@ public class Repository {
                 rs.getString("startTime"),
                 rs.getString("endTime"));
     }
+
 
     private Customer rsCustomer(ResultSet rs) throws SQLException {
         return new Customer(rs.getInt("Id"),
