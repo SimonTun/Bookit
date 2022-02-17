@@ -41,50 +41,58 @@
 </div>
 
 
-    <p class="content">
+<p class="content">
 
-    <div class="article-top">
-        <h1 class="headline-top" style="margin-bottom: 4px;">Bekräfta din bokning</h1>
-        <div class="headline-tagline">
-            Nu är du strax klar med din bokning. Vänligen kontrollera uppgifterna innan du bekräftar
+<div class= "privateOrBusiness">
+    <h3> Bekräfta din bokning</h3>
+    <p>
+        Nu är du strax klar med din bokning. Vänligen kontrollera uppgifterna innan du bekräftar
 
-        </div>
-    </div>
+    </p>
+</div>
 
-        <h3>Mötesdetaljer</h3>
 
-    <div class="customerForm">
 
-        Datum: <p th:text=" ${bookingContent.date}"> </p>
+<div class="customerForm">
 
+    <h3>Mötesdetaljer</h3>
+
+    <p> Datum: </p>
+
+    <div th:text=" ${bookingContent.date}"> </div>
+
+    <p> Tid: </p>
+
+    <div th:text= "${bookingContent.startTime}"></div>
+    <div th:text="${bookingContent.endTime}"> </div>
+
+    <p>Agenda:</p>
+
+    <div th:each="content : ${bookingContent.contents}" th:text="${content}"></div>
+
+
+
+    <p> Övrig information: </p>
+
+    <div th:text=" ${bookingContent.textMessage}"> </div>
+
+
+    <p> Rådgivare: </p>
+
+    <div class="image">
         <div>
-           Tid:    <p th:text= "${bookingContent.startTime}"></p>
-            <div th:text="${bookingContent.endTime}"> </div>
-
+            <img src="../static/lwam.jpg" th:src="'/lwam.jpg'">
         </div>
-
-             <div>
-                 <p>Agenda:</p>
-                <div th:each="content : *{bookingContent.contents}">
-                    <span th:text="${content}"></span>
-                </tr>
-            </div>
-
-            Övrig information:<p  th:text=" ${bookingContent.textMessage}"></p>
-
-
-        Rådgivare: <br>
-
-    <div class="chip">
-        <img src="../static/lwam.jpg" alt="Person" width="96" height="96">
-        <div th:text="${bookingContent.employeeFirstName}"></div>
-        <div th:text="${bookingContent.employeeLastName}"></div>
-      </div>
     </div>
+    <div th:text="${bookingContent.employeeFirstName}"></div>
+    <div th:text="${bookingContent.employeeLastName}"></div>
 
-    Länk till mötet: </br>
-    <a  th:text="${bookingContent.videoLink}" th:href="${bookingContent.videoLink}"></a>
-    </div>
+</div>
 
-    </body>
+<!--    Länk till mötet: </br>-->
+<!--    <a  th:text="${bookingContent.videoLink}" th:href="${bookingContent.videoLink}"></a>-->
+
+
+</body>
 </html>
+
