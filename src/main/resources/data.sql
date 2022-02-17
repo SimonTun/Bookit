@@ -1,8 +1,8 @@
-INSERT INTO CUSTOMER (SocialSecurityNumber, FirstName, LastName, Email, PhoneNumber)
-VALUES(9001112500, 'Ulf', 'Line','ulf@hotmail.com', '08-54398723'),
-(8801128752, 'Sandra', 'Eriksson','Sandra@hotmail.com', '08-54357466'),
-(6601112500, 'Hanna', 'Larsson','Eriksson@gmail.com', '070-5556842'),
-(9001112500, 'Gustav', 'Pettersson','Petterson@gmail.com', '08-54395543');
+INSERT INTO CUSTOMER (FirstName, LastName, Email, PhoneNumber)
+VALUES('Ulf', 'Line','ulf@hotmail.com', '08-54398723'),
+('Sandra', 'Eriksson','Sandra@hotmail.com', '08-54357466'),
+('Hanna', 'Larsson','Eriksson@gmail.com', '070-5556842'),
+('Gustav', 'Pettersson','Petterson@gmail.com', '08-54395543');
 
 
 INSERT INTO Employee (UserName, FirstName, LastName, Email, PhoneNumber)
