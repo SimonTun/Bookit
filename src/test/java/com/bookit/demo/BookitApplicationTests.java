@@ -133,7 +133,7 @@ class BookitApplicationTests {
         Assertions.assertEquals("Jag vill prata ränta och sätta in kontanter", bookingContent.getTextMessage());
         Assertions.assertEquals("Calle", bookingContent.getEmployeeFirstName());
         Assertions.assertEquals("Edqvist", bookingContent.getEmployeeLastName());
-        Assertions.assertEquals("1.jpg", bookingContent.getPictureName());
+        Assertions.assertEquals("1", bookingContent.getPictureName());
         Assertions.assertEquals("https://teams.microsoft.com/l/meetup-join/19%3ameeting_OTZjZjRkOTYtYzlhMi00MjI4LTkwNjUtYzQ5NzFkOGIxNDg", bookingContent.getVideoLink());
 
 
