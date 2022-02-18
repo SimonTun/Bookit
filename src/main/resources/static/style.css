@@ -4,7 +4,8 @@
 
 h1{
   font-family: Helvetica, Arial, sans-serif;
-  color: #1b9dc3;
+  color: #005fa5;
+  font-size: 49px
 
 }
 
@@ -179,12 +180,13 @@ color: #222;
 
 .buttonForm {
 
-    background-color: #005fa5c2;
-    border: 1px solid #005fa5c2;
+    background-color: #005fa5;
+    border: 1px solid #005fa5;
     color: #ffffff;
     font-size: 14px;
-    padding: 8px 9px;
+    padding: 12px 32px;
     margin-left: 10px;
+    margin-top: 12px;
     border-radius: 8px;
 
 }
