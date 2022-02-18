@@ -3,6 +3,8 @@
 let dt = new Date();
 let month = dt.getMonth();
 let year = dt.getFullYear();
+let currentId = sessionStorage.getItem("sessionId")
+console.log(currentId)
 
 
 function renderDate() {
@@ -25,8 +27,14 @@ function renderDate() {
 
    console.log(day);
    for (i = 1; i <= endDate; i++) {
-       if (i == today.getDate() && dt.getMonth() == today.getMonth()) cells += "<div class='today' id= "+ i +
+       if (i == today.getDate() && dt.getMonth() == today.getMonth()) cells += "<div class='today' id= "+ i + 
                                                                     " onclick=availableTimes('"+i+"')>" + i + "</div>";
+
+        else if (i == currentId) cells += "<div class='clicked' id= "+ i + 
+        " onclick=availableTimes('"+i+"')>" + i + "</div>";
+
+        else if (i < today.getDate() && dt.getMonth() == today.getMonth()) cells += "<div class='prev_date'>" + i + "</div>";
+
        else
              cells += "<div class='day' id= "+ i +" onclick=availableTimes('"+i+"')>" + i + "</div>";
 
@@ -58,6 +66,10 @@ function availableTimes (id){
 let bookingDate = year + "-" + (month+1) + "-" + id;
 console.log(bookingDate);
 window.location.href="http://localhost:8080/bookIt/?date=" + bookingDate +"";
+
+sessionStorage.setItem("sessionId",id)
+
+
 
 }
 

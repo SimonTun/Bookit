@@ -35,6 +35,10 @@
     </p>
 
     <p class="show">
+        Granska
+    </p>
+
+    <p>
         Bekräftelse
     </p>
 
@@ -44,9 +48,9 @@
 <p class="content">
 
 <div class= "privateOrBusiness">
-    <h3> Bekräfta din bokning</h3>
+    <h3> Granska din bokning</h3>
     <p>
-        Nu är du strax klar med din bokning. Vänligen kontrollera uppgifterna innan du bekräftar
+        Nu är du strax klar med din bokning. Vänligen kontrollera uppgifterna innan du bokar ditt möte.
 
     </p>
 </div>
@@ -81,16 +85,34 @@
 
     <div class="image">
         <div>
-            <img src="../static/lwam.jpg" th:src="'/lwam.jpg'">
+
+
+            <img src="../static/2.jpg" th:src= "${'/'+bookingContent.pictureName+'.jpg'}">
+
+
+
+
         </div>
     </div>
-    <div th:text="${bookingContent.employeeFirstName}"></div>
+    <p></p>
+    <div th:text="${bookingContent.employeeFirstName}" ></div>
     <div th:text="${bookingContent.employeeLastName}"></div>
+    <p></p>
+    <a href="/confirmation">
+        <button class="buttonForm"> Boka möte </button>
+    </a>
+
+
+
+    <a href="/">
+    <button class="buttonForm"> Startsidan </button>
+    </a>
+
+    <p></p>
 
 </div>
 
-<!--    Länk till mötet: </br>-->
-<!--    <a  th:text="${bookingContent.videoLink}" th:href="${bookingContent.videoLink}"></a>-->
+
 
 
 </body>

@@ -4,7 +4,8 @@
 
 h1{
   font-family: Helvetica, Arial, sans-serif;
-  color: #1b9dc3;
+  color: #005fa5;
+  font-size: 49px
 
 }
 
@@ -62,6 +63,8 @@ text-align: center;
 
 .customerForm p {
 
+    color: black;
+    font-weight: bold;
 
 
 }
@@ -107,6 +110,19 @@ background-color: #f7f7f7;
 
 }
 
+.meetingLink {
+color:blue;
+content-visibility: auto;
+
+}
+
+.content {
+  position: relative;
+  z-index: 0;
+  margin: 50px;
+
+}
+
 .content {
   position: relative;
   z-index: 0;
@@ -145,12 +161,11 @@ color: #222;
 .customerForm {
 
     font-family: Helvetica, Arial, sans-serif;
-    position: inherit;
-    margin-left: 40%;
-    margin-top: 69px;
-    margin-top: 416px margin-left: 192px;
-    display: inline-block;
-    pad: ;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    width: 600px;
     border: 2px solid #87b0c2;
     color: black;
     padding: 36px;
@@ -165,12 +180,13 @@ color: #222;
 
 .buttonForm {
 
-    background-color: #005fa5c2;
-    border: 1px solid #005fa5c2;
+    background-color: #005fa5;
+    border: 1px solid #005fa5;
     color: #ffffff;
     font-size: 14px;
-    padding: 8px 9px;
+    padding: 12px 32px;
     margin-left: 10px;
+    margin-top: 12px;
     border-radius: 8px;
 
 }
@@ -193,6 +209,8 @@ text-decoration: underline;
 .freeSlots {
 
   text-align: center;
+  max-width: 800px;
+  align: center;
 
 }
 
@@ -205,7 +223,8 @@ text-decoration: underline;
 
     width: 100vw;
     height: 46vh;
-    display: flex;
+    display: contents;
+
     }
     .calendar {
     margin-top: 50px;
@@ -260,6 +279,9 @@ text-decoration: underline;
     background-color: #22a7f4;
     color: #fff;
     }
+    .clicked {
+      background-color: #dfe6e9
+    }
     .days div:hover {
     cursor: pointer;
     background-color: #dfe6e9
@@ -293,7 +315,6 @@ text-decoration: underline;
 .slots {
   border-radius: 20px;
   padding: 10px 0;
-  background: #FFFFFF;
   margin: auto;
   text-align: center;
   max-width: 800px;
@@ -332,6 +353,26 @@ a { color: inherit;
 /* Highlight the "free slot" */
 .slots .active {
   color: #1b9dc3;
+}
+
+/* Chip */
+
+.chip {
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #f1f1f1;
+}
+
+.chip img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
 }
 
 /* Chip */

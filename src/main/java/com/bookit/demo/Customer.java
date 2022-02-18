@@ -21,9 +21,12 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
-
     public Customer(){
 
+    }
+    public Customer(String email,String firstName){
+    this.email=email;
+    this.firstName=firstName;
     }
 
     public int getId() {
