@@ -42,6 +42,8 @@ function moveDate(para) {
    renderDate();
 }
 
+
+
 function availableTimes (id){
     let bookingDate = year + "-" + (month+1) + "-" + id;
     console.log(bookingDate);
