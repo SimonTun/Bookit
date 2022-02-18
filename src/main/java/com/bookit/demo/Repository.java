@@ -149,10 +149,6 @@ public class Repository {
     }
     public void storeTextMessage(int bookingrequestId, String textmessage) {
 
-//        UPDATE Customers
-//        SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
-//        WHERE CustomerID = 1;
-//
 
 
         try (Connection conn = dataSource.getConnection();
