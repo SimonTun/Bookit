@@ -30,28 +30,38 @@ public class BookItController {
     public String bookIt(Model model, HttpSession session, @RequestParam(required = false) String date) throws ParseException {
         ArrayList<Timeslot> timeslots;
 
+
+
+
+
         if (date == null || date.length() == 0) {
             System.out.println("no date = today");
+            System.out.println(date);
+            System.out.println(service.getTodaysDate());
+
+
             timeslots = service.prepareTimeslotArrayForPresentationOnWeb(service.getTodaysDate());
-        } else
+        } else {
             timeslots = service.prepareTimeslotArrayForPresentationOnWeb(date);
+            System.out.println("Else-date" +date);
+        }
 
         boolean hasValues = timeslots.size() > 0;
-
+        System.out.println(date);
         model.addAttribute("hasValues", hasValues);
         model.addAttribute("timeslots", timeslots);
         return "bookIt";
     }
 
     @GetMapping("/confirm")
-    public String confirm(Model model, HttpSession session, @RequestParam(required = true) int id) throws ParseException {
+    public String confirm(Model model, HttpSession session, @RequestParam() int id) throws ParseException {
         int bookingRequestId = (int) session.getAttribute("bookingRequestId");
-        int timeslotId = id;
+
 
         Timeslot timeslot = repository.getTimeslot(id);
         model.addAttribute("timeslot", timeslot);
 
-        BookingContent bookingContent=repository.createBookingContent(timeslotId,bookingRequestId);
+        BookingContent bookingContent=repository.createBookingContent(id,bookingRequestId);
 
         model.addAttribute("bookingContent", bookingContent);
         return "confirm";
