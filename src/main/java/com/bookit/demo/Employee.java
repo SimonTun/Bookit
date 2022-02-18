@@ -1,7 +1,6 @@
 package com.bookit.demo;
 
 public class Employee {
-
     private int id;
     private String username;
     private String firstName;

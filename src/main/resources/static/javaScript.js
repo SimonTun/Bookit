@@ -1,5 +1,3 @@
-
-
 let dt = new Date();
 let month = dt.getMonth();
 let year = dt.getFullYear();
@@ -25,28 +23,19 @@ function renderDate() {
        cells += "<div class='prev_date'>" + (prevDate - x + 1) + "</div>";
    }
 
-   console.log(day);
+//loopar igenom kalenderdagarna och anger dagens datum
    for (i = 1; i <= endDate; i++) {
-       if (i == today.getDate() && dt.getMonth() == today.getMonth()) cells += "<div class='today' id= "+ i + 
+       if (i == today.getDate() && dt.getMonth() == today.getMonth()) cells += "<div class='today' id= "+ i +
                                                                     " onclick=availableTimes('"+i+"')>" + i + "</div>";
 
-        else if (i == currentId) cells += "<div class='clicked' id= "+ i + 
+        else if (i == currentId) cells += "<div class='clicked' id= "+ i +
         " onclick=availableTimes('"+i+"')>" + i + "</div>";
 
         else if (i < today.getDate() && dt.getMonth() == today.getMonth()) cells += "<div class='prev_date'>" + i + "</div>";
 
        else
              cells += "<div class='day' id= "+ i +" onclick=availableTimes('"+i+"')>" + i + "</div>";
-
-// under här försökte jag få in länken direkt men det gick inte så vi går via en funktion istället.
-//           cells += "<div class='day' id= "+ i +" th:onclick=window.location.href="/?=2018-03-10">" + i + "</div>";
-
-
-//availableTimes('"+i+"')>" + i + "
-
-
    }
-
    document.getElementsByClassName("days")[0].innerHTML = cells;
 }
 
@@ -72,18 +61,4 @@ sessionStorage.setItem("sessionId",id)
 
 
 }
-
-
-//försökte med en "click- listener" men fick inte det att fungera
-
-//const dateSelected = document.getElementsByClassName('day');
-//console.log(dateSelected)
-//
-//dateSelected.forEach((dateSelected) => {
-//    dateSelected.addEventListener('click', (event) => {
-//        console.log(event.currentTarget.dataset.date);
-//        console.log(dateSelected);
-//        console.log("HEJ!")
-//    });
-//});
 

@@ -4,7 +4,6 @@ VALUES('Ulf', 'Line','ulf@hotmail.com', '08-54398723'),
 ('Hanna', 'Larsson','Eriksson@gmail.com', '070-5556842'),
 ('Gustav', 'Pettersson','Petterson@gmail.com', '08-54395543');
 
-
 INSERT INTO Employee (UserName, FirstName, LastName, Email, PhoneNumber)
 VALUES('Caed02', 'Calle', 'Edqvist','calle@handelsbanken.se', '08-54398663'),
 ('Lwgh01', 'Lwam', 'Ghebresus','lwam@handelsbanken.se', '08-54586994'),
@@ -40,23 +39,18 @@ VALUES
 (2, '2018-03-10', '15:15', '16:00'),
 (2, '2018-08-10', '15:15', '16:00');
 
-
-
 INSERT INTO BOOKINGREQUEST (CustomerId, Textmessage)
 VALUES (1, 'Här är mitt lösenord: test123'),
 (2, 'Jag har fått ett arv från en nigeriansk prins');
-
 
 INSERT INTO Content(BookingrequestID, CONTENT)
 VALUES (1,'PENSIONSAVINGS'),
 (1,'CAPITALSAVINGS'),
 (2,'CAPITALSAVINGS');
 
-
 INSERT INTO Booking (BOOKINGREQUESTID, TimeslotId)
 VALUES (1, 2),
 (2, 3);
-
 
 --INSERT INTO Content (Subjects)
 -- VALUES ('PensionSavings'),

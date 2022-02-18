@@ -1,7 +1,6 @@
 package com.bookit.demo;
 
 public class Customer {
-
     private int id;
     private String firstName;
     private String lastName;
@@ -21,9 +20,7 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
-
     public Customer(){
-
     }
 
     public int getId() {

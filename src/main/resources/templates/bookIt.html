@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,91 +11,67 @@
 </head>
 
 <body onload="renderDate()">
-<div>
-    <h1> Handelsbanken </h1>
-</div>
-</div>
-<div class="line">
+    <div>
+        <h1> Handelsbanken </h1>
+    </div>
 
-</div>
+    <div class="line"></div>
 
-<div class="progressbar">
-    <p>
-        Dina uppgifter
-    </p>
+    <div class="progressbar">
+        <p>Dina uppgifter</p>
+        <p>Agenda</p>
+        <p class="show">Datum och tid</p>
+        <p>Bekräftelse</p>
+    </div>
 
-    <p>
-        Agenda
-    </p>
+    <div class="privateOrBusiness">
+        <h3> Vilken dag önskar du boka ditt möte?</h3>
+        <p>Efter du valt mötesdag kommer du få möjligheter att välja vilken tid mötet ska äga rum.</p>
+    </div>
 
-    <p class="show">
-        Datum och tid
-    </p>
+    <p></p>
 
-    <p>
-        Bekräftelse
-    </p>
-
-</div>
-
-<div class="privateOrBusiness">
-    <h3> Vilken dag önskar du boka ditt möte?</h3>
-    <p>Efter du valt mötesdag kommer du få möjligheter att välja vilken tid mötet ska äga rum.</p>
-
-</div>
-
-<p></p>
-
-<div onload="renderDate()">
-    <div class="wrapper">
-        <div class="calendar">
-            <div class="month">
-                <div class="prev" onclick="moveDate('prev')">
-                    <span>&#10094;</span>
+    <div onload="renderDate()">
+        <div class="wrapper">
+            <div class="calendar">
+                <div class="month">
+                    <div class="prev" onclick="moveDate('prev')">
+                        <span>&#10094;</span>
+                    </div>
+                    <h2 id="month"></h2>
+                    <p id="date_str"></p>
+                    <div class="next" onclick="moveDate('next')">
+                        <span>&#10095;</span>
+                    </div>
                 </div>
-                <h2 id="month"></h2>
-                <p id="date_str"></p>
-                <div class="next" onclick="moveDate('next')">
-                    <span>&#10095;</span>
+                <div class="weekdays">
+                    <div>Mån</div>
+                    <div>Tis</div>
+                    <div>Ons</div>
+                    <div>Tor</div>
+                    <div>Fre</div>
+                    <div>Lör</div>
+                    <div>Sön</div>
                 </div>
+                <div class="days"></div>
             </div>
-            <div class="weekdays">
-                <div>Mån</div>
-                <div>Tis</div>
-                <div>Ons</div>
-                <div>Tor</div>
-                <div>Fre</div>
-                <div>Lör</div>
-                <div>Sön</div>
-
-            </div>
-            <div class="days"></div>
         </div>
     </div>
-
-</div>
-
-<div class="freeSlots">
-    <div th:if="${hasValues}">
-        <h3>Välj vilken tid du önskar boka ditt möte: </h3>
-    </div>
+    <!-- meddelande kring om det inte finns någon ledig tid-->
+    <div class="freeSlots">
+        <div th:if="${hasValues}">
+            <h3>Välj vilken tid du önskar boka ditt möte: </h3>
+        </div>
     <!-- ELSE -->
-    <div th:unless="${hasValues}">
-        <h3>Tyvärr finns inga lediga tider denna dag </h3>
+        <div th:unless="${hasValues}">
+            <h3>Tyvärr finns inga lediga tider denna dag </h3>
+        </div>
     </div>
-
-
-</div>
-
-
-<ul class="slots">
-    <span th:each="slot : ${timeslots}">
-        <li><a th:href="'/confirm?id=' + ${slot.id}" th:text="${slot.startTime + ' - ' + slot.endTime}"></a></li>
-    </span>
-</ul>
-
-
+    <!-- loopar ut de tider som finns lediga-->
+    <ul class="slots">
+        <span th:each="slot : ${timeslots}">
+            <li><a th:href="'/confirm?id=' + ${slot.id}" th:text="${slot.startTime + ' - ' + slot.endTime}"></a></li>
+        </span>
+    </ul>
 </body>
-
-
 </html>

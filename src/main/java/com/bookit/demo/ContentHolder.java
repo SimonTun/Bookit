@@ -1,5 +1,4 @@
 package com.bookit.demo;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,27 +8,21 @@ public class ContentHolder {
     private List<Content> contents= new ArrayList<>();
     private String textMessage;
 
-
     public ContentHolder(int id, int bookingRequestId, List<Content> contents, String textMessage) {
         this.id = id;
         this.bookingRequestId = bookingRequestId;
         this.contents = contents;
         this.textMessage=textMessage;
     }
-
     public ContentHolder(int bookingRequestId, List<Content> contents, String textMessage) {
         this.bookingRequestId = bookingRequestId;
         this.contents = contents;
         this.textMessage=textMessage;
-
     }
-
     public ContentHolder(){
-
     }
     public ContentHolder(int bookingRequestId){
         this.bookingRequestId=bookingRequestId;
-
     }
 
     public int getBookingRequestId() {
@@ -47,8 +40,6 @@ public class ContentHolder {
     public void setId(int id) {
         this.id = id;
     }
-
-
 
     public List<Content> getContents() {
         return contents;

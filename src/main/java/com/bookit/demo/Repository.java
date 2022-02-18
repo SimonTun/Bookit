@@ -1,7 +1,6 @@
 package com.bookit.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,10 +12,7 @@ public class Repository {
     @Autowired
     private DataSource dataSource;
 
-
-
     public ArrayList<Timeslot> getEmptyTimeslots() {
-
         ArrayList<Timeslot> timeslots = new ArrayList<>();
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT " +
@@ -30,16 +26,13 @@ public class Repository {
             e.printStackTrace();
         }
 
-
         return timeslots;
     }
 
     public ArrayList<Timeslot> getEmptyTimeslotsOnDate(String date) {
-
         ArrayList<Timeslot> timeslots = new ArrayList<>();
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT " +
-//             PreparedStatement ps = conn.prepareStatement("SELECT ID, EmployeeId, BookingDate, TO_CHAR(STARTTIME, 'HH24:MI') AS STARTTIME, TO_CHAR(ENDTIME, 'HH24:MI') AS ENDTIME FROM TIMESLOT " +
                      "WHERE TIMESLOT.BOOKINGDATE = ? AND " +
                      "NOT EXISTS (SELECT NULL FROM BOOKING WHERE TIMESLOTID = TIMESLOT.ID) " +
                      "ORDER BY STARTTIME")) {
@@ -52,12 +45,10 @@ public class Repository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return timeslots;
     }
 
     public ArrayList<Timeslot> getDistinctEmptyTimeslotsOnDate(String date) {
-
         ArrayList<Timeslot> timeslots = new ArrayList<>();
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT ID, EmployeeId, BookingDate, DISTINCT(STARTTIME), ENDTIME FROM TIMESLOT " +
@@ -72,13 +63,11 @@ public class Repository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return timeslots;
     }
 
     public int newBooking(int BookingrequestID, int timeslotId) {
         int generatedId = 0;   // Kan inte skapa int = null
-
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO Booking (BookingrequestID, TimeslotId) VALUES (?,?) ", Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, BookingrequestID);
@@ -89,7 +78,6 @@ public class Repository {
             if (rs.next()) {
                 generatedId = rs.getInt(1);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -98,7 +86,6 @@ public class Repository {
 
     public int newTimeslot(int employeeId, String date, String startTime, String endTime) {
         int generatedId = -1;   // Kan inte skapa int = null
-
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO Timeslot (EmployeeId, BookingDate, StartTime, EndTime) VALUES (?,?,?,?) ", Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, employeeId);
@@ -119,10 +106,8 @@ public class Repository {
     }
 
     public void newContent(ContentHolder content) {
-
         String value;
         int bookingRequestId = content.getBookingRequestId();
-
         storeTextMessage(bookingRequestId, content.getTextMessage());   // Spara textMessage till sql BOOKINGREQUEST, genom separat metod
 
         for (int i = 0; i < content.getContents().size(); i++) {
@@ -135,8 +120,6 @@ public class Repository {
                     ps.setString(2, value);
 
                     ps.executeUpdate();
-
-
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -247,16 +230,10 @@ public class Repository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
         return new BookingContent(date,startTime,endTime,contents,textMessage,employeeFirstName,employeeLastName,picture,videoLink);
-
-
     }
     public String getAnyStringFromDatabase(String str) {  // Svarar med antalet lediga bookings
-
         // This method works with parameter eg. "SELECT COLUMNNAME FROM TABLENAME AS RESULT WHERE ID=X"
-
         String result ="";
 
         try (Connection conn = dataSource.getConnection();
@@ -272,14 +249,8 @@ public class Repository {
         return result;
     }
 
-
-
-    //Metoden nedan behövs egentligen inte. Metodens svar går att få från getEmptyTimeslots().size
-
-
-
+    //Metoden nedan behövs egentligen inte. Metodens svar går att få från getEmptyTimeslots().size, den finns dock i testen
     public int numberOfEmptyTimeslots() {  // Svarar med antalet lediga bookings
-
         int result = -1;
 
         try (Connection conn = dataSource.getConnection();
@@ -297,7 +268,6 @@ public class Repository {
     }
 
     public int numberOfBookings() {  // Svarar med antalet lediga bookings
-
         int result = -1;
 
         try (Connection conn = dataSource.getConnection();
@@ -345,24 +315,6 @@ public class Repository {
         return null;
     }
 
-//    public List<Content> getAllsubjects() {
-//        List<Content> contents = new ArrayList<>();
-//        try (Connection conn = dataSource.getConnection();
-//             Statement stmt = conn.createStatement();
-//             ResultSet rs = stmt.executeQuery("SELECT * FROM Content")) {
-//
-//            while (rs.next()){
-//                contents.add(rsContent(rs));
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return contents;
-//    }
-
-    //
-
     private Timeslot rsTimeslot(ResultSet rs) throws SQLException {
         return new Timeslot(rs.getInt("Id"),
                 rs.getInt("employeeId"),
@@ -371,7 +323,6 @@ public class Repository {
                 rs.getString("endTime"));
     }
 
-
     private Customer rsCustomer(ResultSet rs) throws SQLException {
         return new Customer(rs.getInt("Id"),
                 rs.getString("FirstName"),
@@ -379,6 +330,23 @@ public class Repository {
                 rs.getString("PhoneNumber"),
                 rs.getString("Email"));
 
+    }
+
+    public ArrayList<Timeslot> getEmployeesBookings(int id) {
+
+        ArrayList<Timeslot> employeesTimeslots = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM TIMESLOT WHERE EMPLOYEEID =? ")) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                employeesTimeslots.add(rsTimeslot(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employeesTimeslots;
     }
 
 
